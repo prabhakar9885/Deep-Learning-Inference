@@ -1,6 +1,13 @@
 
+#ifndef SIGMOID
+#define SIGMOID
+
+
 #include "Activation.cuh"
 
-class Sigmoid : Activation {
+
+class Sigmoid : public Activation {
 
 };
+
+#endif // !SIGMOID

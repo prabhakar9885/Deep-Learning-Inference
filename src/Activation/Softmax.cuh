@@ -1,6 +1,11 @@
 
+#ifndef SOFTMAX
+#define SOFTMAX
+
 #include "Activation.cuh"
 
-class Softmax : Activation
+class Softmax : public Activation
 {
 };
+
+#endif // !SOFTMAX
