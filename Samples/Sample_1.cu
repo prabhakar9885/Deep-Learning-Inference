@@ -3,6 +3,7 @@
 #include "../src/Layers/Layer.cuh"
 #include "../src/Layers/Input.cuh"
 #include "../src/Layers/Hidden.cuh"
+#include "../src/Layers/DenseLayer.cuh"
 #include "../src/Layers/Output.cuh"
 #include "../src/Activation/Sigmoid.cuh"
 #include "../src/Activation/Softmax.cuh"
@@ -22,7 +23,7 @@ int main() {
 	// Push Hidden layers
 	vector<int> hiddenLayersSize = {};
 	for (int i = 0; i < 4; i++) {
-		Layer* hiddenLayer = new Hidden(10, new Sigmoid());
+		Layer* hiddenLayer = new DenseLayer(10, new Sigmoid());
 		nnObj->pushLayer(hiddenLayer);
 	}
 
