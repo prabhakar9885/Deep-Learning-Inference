@@ -4,6 +4,7 @@
 #include "cuda_runtime_api.h"
 #include <vector>
 #include "../Layers/Layer.cuh"
+#include "../Activation/Activation.cuh"
 
 using namespace std;
 
@@ -23,24 +24,28 @@ public:
 	void init(vector<vector<float>>& weights) {
 		cout << "Initiaizing the NN... ";
 		unsigned __int64 noOfLayers = layers.size();
+		this->weights.push_back(vector<float>(0));
 		if (weights.size() != noOfLayers )
 			throw "Weights dimension mismatches NN dimensions";
-		for (unsigned __int64 indexOfCurrentLayer = 1u; indexOfCurrentLayer < noOfLayers; indexOfCurrentLayer++) {
+		for (size_t indexOfCurrentLayer = 0; indexOfCurrentLayer < noOfLayers; indexOfCurrentLayer++) {
 			this->weights.push_back( weights[indexOfCurrentLayer] );
 		}
 		cout << "done\n";
 	}
 
-	int forword(vector<int>& input_sample) {
+	int forword(vector<float>& input_sample) {
 		cout << "Predicting...";
 		
-		for (size_t i = 0; i < layers.size(); i++)
+		for (size_t i = 1; i < layers.size(); i++)
 		{
+			cout << "\n\tComputing for layer-" << i;
 			//  Z = W*X + B
+			axpb_vector_matrix( weights[i], input_sample, 1);
+			computeActivation(input_sample, layers[i].activationFunc);
 			//	A = f(Z)
 		}
 
-		cout << "done \n";
+		cout << "\ndone";
 		return -1;
 	}
 };
