@@ -86,8 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Activation\Activation.cuh" />
-    <ClInclude Include="src\Activation\Sigmoid.cuh" />
-    <ClInclude Include="src\Activation\Softmax.cuh" />
+    <ClInclude Include="src\cuBLAS\blasUtills.cuh" />
     <ClInclude Include="src\Layers\DenseLayer.cuh" />
     <ClInclude Include="src\Layers\Hidden.cuh" />
     <ClInclude Include="src\Layers\Input.cuh" />

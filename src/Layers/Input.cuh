@@ -6,11 +6,11 @@
 
 class Input : public Layer {
 public:
-	Input(int size) :Layer(size, nullptr) {
+	Input(int size) :Layer(size, Activation::IDENTITY) {
 		cout << "Created input layer\n";
 	}
 
-	Input(int size, string name) :Layer(size, nullptr, name) {
+	Input(int size, string name) :Layer(size, Activation::IDENTITY, name) {
 	}
 };
 

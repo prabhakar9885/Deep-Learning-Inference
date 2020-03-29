@@ -3,15 +3,13 @@
 #define ACTIVATION
 
 
-class Activation {
-public:
-	Activation() {
-
-	}
-
-	float* compute(float *value) {
-		return nullptr;
-	}
+enum class Activation
+{
+    SIGMOID,
+    ReLU,
+    SOFTMAX,
+    IDENTITY
 };
+
 
 #endif // !ACTIVATION

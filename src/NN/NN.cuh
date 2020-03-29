@@ -31,8 +31,15 @@ public:
 		cout << "done\n";
 	}
 
-	int predict(vector<int>& input_sample) {
+	int forword(vector<int>& input_sample) {
 		cout << "Predicting...";
+		
+		for (size_t i = 0; i < layers.size(); i++)
+		{
+			//  Z = W*X + B
+			//	A = f(Z)
+		}
+
 		cout << "done \n";
 		return -1;
 	}

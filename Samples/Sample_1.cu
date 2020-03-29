@@ -5,8 +5,7 @@
 #include "../src/Layers/Hidden.cuh"
 #include "../src/Layers/DenseLayer.cuh"
 #include "../src/Layers/Output.cuh"
-#include "../src/Activation/Sigmoid.cuh"
-#include "../src/Activation/Softmax.cuh"
+#include "../src/Activation/Activation.cuh"
 #include "iostream"
 
 using namespace std;
@@ -21,12 +20,12 @@ int main() {
 
 		// Push Hidden layers
 		for (int i = 0; i < 8; i++) {
-			DenseLayer hiddenLayer(10, new Sigmoid(), "Hidden " + to_string(i));
+			DenseLayer hiddenLayer(10, Activation::ReLU, "Hidden " + to_string(i));
 			nnObj->pushLayer(hiddenLayer);
 		}
 
 		// Push Output layer
-		Output outputLayer(10, new Softmax(), "Output layer");
+		Output outputLayer(10, Activation::SOFTMAX, "Output layer");
 		nnObj->pushLayer(outputLayer);
 
 		// Init NN with weights
@@ -36,7 +35,7 @@ int main() {
 
 		// Do inference
 		vector<int> inputSample;
-		cout << nnObj->predict(inputSample) << "\n";
+		cout << nnObj->forword(inputSample) << "\n";
 	}
 	catch (string msg) {
 		cout << "Exception: " << msg << "\n";
