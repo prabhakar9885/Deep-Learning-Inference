@@ -12,32 +12,35 @@
 using namespace std;
 
 int main() {
-	cout << "Hello World.\n";
+	try {
+		NN* nnObj = new NN();
 
-	NN* nnObj = new NN();
+		// Push Input layer
+		Input inputLayer(10, "Input layer");
+		nnObj->pushLayer(inputLayer);
 
-	// Push Input layer
-	Layer* inputLayer = new Input(10);
-	nnObj->pushLayer(inputLayer);
+		// Push Hidden layers
+		for (int i = 0; i < 8; i++) {
+			DenseLayer hiddenLayer(10, new Sigmoid(), "Hidden " + to_string(i));
+			nnObj->pushLayer(hiddenLayer);
+		}
 
-	// Push Hidden layers
-	vector<int> hiddenLayersSize = {};
-	for (int i = 0; i < 4; i++) {
-		Layer* hiddenLayer = new DenseLayer(10, new Sigmoid());
-		nnObj->pushLayer(hiddenLayer);
+		// Push Output layer
+		Output outputLayer(10, new Softmax(), "Output layer");
+		nnObj->pushLayer(outputLayer);
+
+		// Init NN with weights
+		vector<vector<float>> weights;
+		weights.resize( 10, vector<float>(0));
+		nnObj->init(weights);
+
+		// Do inference
+		vector<int> inputSample;
+		cout << nnObj->predict(inputSample) << "\n";
 	}
-
-	// Push Output layer
-	Layer* outputLayer = new Output(10, new Softmax());
-	nnObj->pushLayer(outputLayer);
-
-	// Init NN with weights
-	vector<vector<float>> *weights = nullptr;
-	nnObj->init(weights);
-
-	// Do inference
-	vector<int> *inputSample = nullptr;
-	cout << nnObj->predict(inputSample) << "\n";
+	catch (string msg) {
+		cout << "Exception: " << msg << "\n";
+	}
 
 	return 0;
 }

@@ -12,6 +12,9 @@ class Hidden : public Layer {
 public:
 	Hidden(int size, Activation* activationFunc):Layer(size, activationFunc) {
 	}
+
+	Hidden(int size, Activation* activationFunc, string name) :Layer(size, activationFunc, name) {
+	}
 };
 
 #endif // !HIDDEN

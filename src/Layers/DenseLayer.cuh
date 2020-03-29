@@ -11,6 +11,8 @@ class DenseLayer : public Hidden {
 public:
 	DenseLayer(int size, Activation* activationFunc) :Hidden(size, activationFunc) {
 	}
+	DenseLayer(int size, Activation* activationFunc, string name) :Hidden(size, activationFunc, name) {
+	}
 };
 
 #endif // !DENSELAYER
