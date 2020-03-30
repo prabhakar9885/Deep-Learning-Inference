@@ -29,7 +29,7 @@ namespace utils
 	}
 
 
-	void axpb_vector_matrix(vector<float> a, vector<float>& x, float b) {
+	void axpb_vector_matrix(vector<vector<float>> a, vector<float>& x, float b) {
 		
 		return;
 		

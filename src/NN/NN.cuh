@@ -11,7 +11,7 @@ using namespace std;
 class NN {
 public:
 	vector<Layer> layers;
-	vector<vector<float>> weights;
+	vector<vector<vector<float>>> weights;
 	NN() {
 
 	}
@@ -21,10 +21,10 @@ public:
 		cout << "Pushed: " << layer.name << "\n";
 	}
 
-	void init(vector<vector<float>>& weights) {
+	void init(vector<vector<vector<float>>> weights) {
 		cout << "Initiaizing the NN... ";
 		unsigned __int64 noOfLayers = layers.size();
-		this->weights.push_back(vector<float>(0));
+		this->weights.push_back(vector<vector<float>>(0));
 		if (weights.size() != noOfLayers )
 			throw "Weights dimension mismatches NN dimensions";
 		for (size_t indexOfCurrentLayer = 0; indexOfCurrentLayer < noOfLayers; indexOfCurrentLayer++) {

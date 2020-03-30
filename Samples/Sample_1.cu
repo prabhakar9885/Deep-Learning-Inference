@@ -30,8 +30,13 @@ int main() {
 		nnObj->pushLayer(outputLayer);
 
 		// Init NN with weights
-		vector<vector<float>> weights;
-		weights.resize( 10, vector<float>(0));
+		vector<vector<vector<float>>> weights;
+		int prev_layer_size = layers_dims[0];
+		for (size_t i = 0; i < layers_dims.size(); i++)
+		{
+			vector<vector<float>> weight(layers_dims[i], vector<float>(prev_layer_size, 1));
+			weights.push_back(weight);
+		}
 		nnObj->init(weights);
 
 		// Do inference
