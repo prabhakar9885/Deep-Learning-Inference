@@ -18,23 +18,24 @@ public:
 
 	void pushLayer(Layer& layer) {
 		layers.push_back(layer);
-		cout << "Pushed: " << layer.name << "\n";
+		cout << "\nPushed " << "Layer-" << (layers.size() - 1) << ": " << layer.name << "(" << layer.size << ")";
 	}
 
 	void init(vector<vector<vector<float>>> weights) {
-		cout << "Initiaizing the NN... ";
+		cout << "\nInitiaizing the NN... ";
 		unsigned __int64 noOfLayers = layers.size();
 		this->weights.push_back(vector<vector<float>>(0));
 		if (weights.size() != noOfLayers )
 			throw "Weights dimension mismatches NN dimensions";
 		for (size_t indexOfCurrentLayer = 0; indexOfCurrentLayer < noOfLayers; indexOfCurrentLayer++) {
 			this->weights.push_back( weights[indexOfCurrentLayer] );
+			cout << "\nWts for Layer-" << indexOfCurrentLayer << ": " << weights[indexOfCurrentLayer].size() << "x" << weights[indexOfCurrentLayer][0].size();
 		}
-		cout << "done\n";
+		cout << "\ndone";
 	}
 
 	int forword(vector<float>& input_sample) {
-		cout << "Predicting...";
+		cout << "\nPredicting...";
 		
 		for (size_t i = 1; i < layers.size(); i++)
 		{

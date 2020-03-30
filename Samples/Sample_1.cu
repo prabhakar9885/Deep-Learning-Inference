@@ -31,11 +31,15 @@ int main() {
 
 		// Init NN with weights
 		vector<vector<vector<float>>> weights;
-		int prev_layer_size = layers_dims[0];
-		for (size_t i = 0; i < layers_dims.size(); i++)
+		int prev_layer_size = 1;
+		vector<vector<float>> weight(layers_dims[0], vector<float>(prev_layer_size, 1));
+		weights.push_back(weight);
+		prev_layer_size = layers_dims[0];
+		for (size_t i = 1; i < layers_dims.size(); i++)
 		{
 			vector<vector<float>> weight(layers_dims[i], vector<float>(prev_layer_size, 1));
 			weights.push_back(weight);
+			prev_layer_size = layers_dims[i];
 		}
 		nnObj->init(weights);
 
