@@ -277,11 +277,125 @@ void transpose_mat() {
 #pragma endregion
 
 
+/**
+ *	https://www.adityaagrawal.net/blog/deep_learning/row_column_major
+ */
+void mat_mul_2() {
+	cout << "Mat mul" << "\n" << "===============" << "\n";
+
+	int p = 6, q = 4, r = 2;
+	float* mat1; //  Human rep: p x q
+	float* mat2; //  Human rep: q x r
+	float* mat_prod;
+	float* mat_prod_T;
+	float* tmp;
+	cudaError_t err;
+
+	err = cudaMallocManaged((void**)&mat1, sizeof(float) * p * q);
+	checkCuda(err);
+	err = cudaMallocManaged((void**)&mat2, sizeof(float) * q * r);
+	checkCuda(err);
+	err = cudaMallocManaged((void**)&mat_prod, sizeof(float) * p * r);
+	checkCuda(err);
+	err = cudaMallocManaged((void**)&mat_prod_T, sizeof(float) * p * r);
+	checkCuda(err);
+
+	// Init mat1
+	int val = 0;
+	for (size_t i = 0; i < p; i++)
+	{
+		for (size_t j = 0; j < q; j++)
+		{
+			mat1[i * q + j] = val;
+			val = (val + 1) % 5;
+		}
+	}
+
+	for (size_t i = 0; i < p; i++)
+	{
+		for (size_t j = 0; j < q; j++)
+		{
+			cout << mat1[i * q + j] << std::setw(5);
+		}
+		cout << "\n";
+	}
+	cout << "\n";
+
+	// Init mat2
+	val = 0;
+	for (size_t i = 0; i < q; i++)
+	{
+		for (size_t j = 0; j < r; j++)
+		{
+			mat2[i * r + j] = val;
+			val = (val + 1) % 5;
+		}
+	}
+	for (size_t i = 0; i < q; i++)
+	{
+		for (size_t j = 0; j < r; j++)
+		{
+			cout << mat2[i * r + j] << std::setw(5);
+		}
+		cout << "\n";
+	}
+	cout << "\n";
+
+	// Scalaing factors
+	float alpha = 1.0f;
+	float beta = 0.0f;
+
+	// Create and initialize a new context
+	cublasHandle_t handle;
+	cublasStatus_t status;
+	cublasCreate_v2(&handle);
+
+	//	CMO => mat_prod := alpha * mat2.T * mat1.T + beta * mat_prod.T
+	//					:= mat2.T * mat1.T
+	status = cublasSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_N, r, p, q, &alpha, mat2, r, mat1, q, &beta, mat_prod, r);
+	cudaDeviceSynchronize();
+	for (size_t i = 0; i < r; i++)
+	{
+		for (size_t j = 0; j < p; j++)
+		{
+			cout << mat_prod[i * p + j] << std::setw(5);
+		}
+		cout << "\n";
+	}
+	cout << "\n";
+
+	// CMO	=>	mat_prod_T	:= alpha * mat_prod.T  +  beta * mat_prod.T
+	//						:= mat_prod.T
+	status = cublasSgeam(handle, CUBLAS_OP_T, CUBLAS_OP_T, r, p, &alpha, mat_prod, p, &beta, mat_prod, p, mat_prod_T, r);
+	cudaDeviceSynchronize();
+	for (size_t i = 0; i < p; i++)
+	{
+		for (size_t j = 0; j < r; j++)
+		{
+			cout << mat_prod_T[i * r + j] << std::setw(5);
+		}
+		cout << "\n";
+	}
+
+
+	// Clean up the created handle
+	cublasDestroy(handle);
+
+	// Release allocated memory
+	cudaFree(mat1);
+	cudaFree(mat2);
+	cudaFree(mat_prod);
+	cudaFree(mat_prod_T);
+
+	cout << "\n\n";
+}
+
 int main_() {
 	//mat_mul();
+	mat_mul_2();
 	//axpy();
 	//axpb_vector_matrix();
-	map();
+	//map();
 	//transpose_mat();
 	return 0;
 }
