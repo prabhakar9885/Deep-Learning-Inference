@@ -395,6 +395,7 @@ void mat_mul_2() {
  * Implemented in RMO
  * C = AX  ;   A(mxn) ; X(nx1)
  * https://www.adityaagrawal.net/blog/deep_learning/row_column_major
+ * https://stackoverflow.com/questions/14595750/transpose-matrix-multiplication-in-cublas-howto
  */
 void axpb_vector_matrix_() {
 
