@@ -390,11 +390,93 @@ void mat_mul_2() {
 	cout << "\n\n";
 }
 
-int main_() {
+
+/**
+ * Implemented in RMO
+ * C = AX  ;   A(mxn) ; X(nx1)
+ * https://www.adityaagrawal.net/blog/deep_learning/row_column_major
+ */
+void axpb_vector_matrix_() {
+
+	size_t m = 5, n = 3;
+	float* A; // m x n
+	float* X; // n x 1
+	float b = 1; // scalar
+	float* C; // m x 1
+	float alpha = 1, beta = 0;
+
+	cudaMallocManaged(&A, m * n * sizeof(float));
+	cudaMallocManaged(&X, n * 1 * sizeof(float));
+	cudaMallocManaged(&C, m * 1 * sizeof(float));
+
+	// Init A
+	int val = 0;
+	for (size_t i = 0; i < m; i++)
+	{
+		for (size_t j = 0; j < n; j++)
+		{
+			A[i * n + j] = val;
+			val = (val + 1) % 8;
+		}
+	}
+	cout << "\n";
+	for (size_t i = 0; i < m; i++)
+	{
+		for (size_t j = 0; j < n; j++)
+		{
+			cout << A[i * n + j] << std::setw(5);
+		}
+		cout << "\n";
+	}
+
+	// Init X
+	val = 1;
+	for (size_t i = 0; i < n; i++)
+	{
+		X[i] = val;
+		val = (val + 1);
+	}
+	cout << "\n";
+	for (size_t i = 0; i < n; i++)
+	{
+		cout << X[i] << "\n";
+	}
+
+	// Init C
+	for (size_t i = 0; i < m; i++)
+	{
+		C[i] = 0;
+	}
+	cout << "\n";
+	for (size_t i = 0; i < m; i++)
+	{
+		cout << C[i] << "\n";
+	}
+
+	cublasHandle_t handle;
+	cublasCreate(&handle);
+	cublasSgemv(handle, CUBLAS_OP_T, n, m, &alpha, A, n, X, 1, &beta, C, 1 );
+	cudaDeviceSynchronize();
+
+	cout << "\n";
+	for (size_t i = 0; i < m; i++)
+	{
+		cout << C[i] << "\n";
+	}
+
+	cublasDestroy(handle);
+	cudaFree(A);
+	cudaFree(X);
+	cudaFree(C);
+}
+
+
+int main_1() {
 	//mat_mul();
-	mat_mul_2();
+	//mat_mul_2();
 	//axpy();
 	//axpb_vector_matrix();
+	axpb_vector_matrix_();
 	//map();
 	//transpose_mat();
 	return 0;
