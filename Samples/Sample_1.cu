@@ -13,8 +13,8 @@ using namespace std;
 int main() {
 	try {
 		NN* nnObj = new NN();
-		//vector<int> layers_dims({ 12288, 128, 128, 128, 128, 128, 64, 64, 32, 1 });
-		vector<int> layers_dims({ 6, 4, 3, 2, 2, 2, 3, 4, 2, 1 });
+		vector<int> layers_dims({ 12288, 128, 128, 128, 128, 128, 64, 64, 32, 1 });
+		//vector<int> layers_dims({ 6, 4, 3, 2, 2, 2, 3, 4, 2, 1 });
 
 		// Push Input layer
 		Input inputLayer(layers_dims[0], "Input layer");
@@ -27,18 +27,18 @@ int main() {
 		}
 
 		// Push Output layer
-		Output outputLayer(layers_dims[layers_dims.size() - 1], Activation::SOFTMAX, "Output layer");
+		Output outputLayer(layers_dims[layers_dims.size() - 1], Activation::SIGMOID, "Output layer");
 		nnObj->pushLayer(outputLayer);
 
 		// Init NN with weights
 		vector<vector<vector<float>>> weights;
 		int prev_layer_size = 1;
-		vector<vector<float>> weight(layers_dims[0], vector<float>(prev_layer_size, 1));
+		vector<vector<float>> weight(layers_dims[0], vector<float>(prev_layer_size, 1.0 ));
 		weights.push_back(weight);
 		prev_layer_size = layers_dims[0];
 		for (size_t i = 1; i < layers_dims.size(); i++)
 		{
-			vector<vector<float>> weight(layers_dims[i], vector<float>(prev_layer_size, 1));
+			vector<vector<float>> weight(layers_dims[i], vector<float>(prev_layer_size, 1.0 ));
 			weights.push_back(weight);
 			prev_layer_size = layers_dims[i];
 		}

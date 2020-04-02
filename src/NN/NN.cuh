@@ -29,7 +29,7 @@ public:
 			throw "Weights dimension mismatches NN dimensions";
 		for (size_t indexOfCurrentLayer = 1; indexOfCurrentLayer < noOfLayers; indexOfCurrentLayer++) {
 			this->weights.push_back( weights[indexOfCurrentLayer] );
-			cout << "\nWts for Layer-" << indexOfCurrentLayer << ": " << weights[indexOfCurrentLayer].size() << "x" << weights[indexOfCurrentLayer][0].size();
+			//cout << "\nWts for Layer-" << indexOfCurrentLayer << ": " << weights[indexOfCurrentLayer].size() << "x" << weights[indexOfCurrentLayer][0].size();
 		}
 		cout << "\ndone";
 	}
@@ -47,6 +47,6 @@ public:
 		}
 
 		cout << "\ndone";
-		return -1;
+		return input_sample[0];
 	}
 };

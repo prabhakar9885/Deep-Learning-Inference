@@ -22,10 +22,16 @@ namespace utils
 	}
 
 
-	__global__ void sigmoid(float* inp, float* res, int N) {
+	__global__ void sigmoid(float* inp, int N) {
 		int indx = blockDim.x * blockIdx.x + threadIdx.x;
 		if (indx < N)
-			res[indx] = 1 / (1 + exp(-inp[indx]));
+			inp[indx] = 1 / (1 + exp(-inp[indx]));
+	}
+
+	__global__ void relu(float* inp, int N) {
+		int indx = blockDim.x * blockIdx.x + threadIdx.x;
+		if (indx < N)
+			inp[indx] = 0 > inp[indx] ? 0 : inp[indx];
 	}
 
 
@@ -64,27 +70,27 @@ namespace utils
 		cublasSgemv(handle, CUBLAS_OP_T, n, m, &alpha, W, n, X, 1, &beta, C, 1);
 		cudaDeviceSynchronize();
 
-		cout << "\n";
-		for (size_t i = 0; i < m; i++)
-		{
-			for (size_t j = 0; j < n; j++)
-			{
-				cout << wt[i][j] << " ";
-			}
-			cout << "\n";
-		}
-		cout << "\n";
+		//cout << "\n";
+		//for (size_t i = 0; i < m; i++)
+		//{
+		//	for (size_t j = 0; j < n; j++)
+		//	{
+		//		cout << wt[i][j] << " ";
+		//	}
+		//	//cout << "\n";
+		//}
+		//cout << "\n";
 
-		for (size_t i = 0; i < n; i++)
-		{
-			cout << x[i] << "\n";
-		}
-		cout << "\n";
+		//for (size_t i = 0; i < n; i++)
+		//{
+		//	cout << x[i] << "\n";
+		//}
+		//cout << "\n";
 
 		x = vector<float>();
 		for (size_t i = 0; i < m; i++)
 		{
-			cout << C[i] << "\n";
+			//cout << C[i] << "\n";
 			x.push_back(C[i]);
 		}
 
@@ -96,28 +102,25 @@ namespace utils
 
 	void computeActivation(vector<float>& x, Activation activation)
 	{
-
-		return;
-
 		float* arr;
 		float* res;
-		int N = 10;
+		int N = x.size();
 
 		cudaMallocManaged(&arr, N * sizeof(float));
-		cudaMallocManaged(&res, N * sizeof(float));
 
 		for (int i = 0; i < N; i++)
-			arr[i] = N / 2 - i;
+			arr[i] = x[i];
 
-		int blockSize = 8;
+		int blockSize = 1024;
 		int blockCount = N / blockSize + (N % blockSize != 0);
 
 		switch (activation)
 		{
 		case Activation::SIGMOID:
-			sigmoid << < blockCount, blockSize >> > (arr, res, N);
+			sigmoid << < blockCount, blockSize >> > (arr, N);
 			break;
 		case Activation::ReLU:
+			relu << < blockCount, blockSize >> > (arr, N);
 			break;
 		case Activation::SOFTMAX:
 			break;
@@ -125,20 +128,16 @@ namespace utils
 			throw "Unidentified Activation type";
 		}
 
-
 		cudaDeviceSynchronize();
 
-		cout << "First 5 elements\n";
-		for (int i = 0; i < min(5, N); i++)
-			cout << "sigmoid(" << arr[i] << ") : " << res[i] << "\n";
-
-		cout << "Last 5 elements\n";
-		for (int i = max(N - 5, 0); i < max(5, N); i++)
-			cout << "sigmoid(" << arr[i] << ") : " << res[i] << "\n";
+		//cout << "\n";
+		for (int i = 0; i < N; i++) {
+			x[i] = arr[i];
+			//cout << x[i] << " ";
+		}
+		//cout << "\n\n";
 
 		cudaFree(arr);
-		cudaFree(res);
-
 	}
 }
 #endif // MathOps
