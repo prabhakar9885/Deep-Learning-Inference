@@ -13,7 +13,8 @@ using namespace std;
 int main() {
 	try {
 		NN* nnObj = new NN();
-		vector<int> layers_dims({ 12288, 128, 128, 128, 128, 128, 64, 64, 32, 1 });
+		//vector<int> layers_dims({ 12288, 128, 128, 128, 128, 128, 64, 64, 32, 1 });
+		vector<int> layers_dims({ 6, 4, 3, 2, 2, 2, 3, 4, 2, 1 });
 
 		// Push Input layer
 		Input inputLayer(layers_dims[0], "Input layer");
@@ -44,7 +45,7 @@ int main() {
 		nnObj->init(weights);
 
 		// Do inference
-		vector<float> inputSample;
+		vector<float> inputSample(layers_dims[0], 1);
 		cout << "\n" << nnObj->forword(inputSample) << "\n";
 	}
 	catch (string msg) {

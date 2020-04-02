@@ -27,7 +27,7 @@ public:
 		this->weights.push_back(vector<vector<float>>(0));
 		if (weights.size() != noOfLayers )
 			throw "Weights dimension mismatches NN dimensions";
-		for (size_t indexOfCurrentLayer = 0; indexOfCurrentLayer < noOfLayers; indexOfCurrentLayer++) {
+		for (size_t indexOfCurrentLayer = 1; indexOfCurrentLayer < noOfLayers; indexOfCurrentLayer++) {
 			this->weights.push_back( weights[indexOfCurrentLayer] );
 			cout << "\nWts for Layer-" << indexOfCurrentLayer << ": " << weights[indexOfCurrentLayer].size() << "x" << weights[indexOfCurrentLayer][0].size();
 		}
