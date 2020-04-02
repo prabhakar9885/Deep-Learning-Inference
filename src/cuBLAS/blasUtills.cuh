@@ -81,9 +81,11 @@ namespace utils
 		}
 		cout << "\n";
 
+		x = vector<float>();
 		for (size_t i = 0; i < m; i++)
 		{
 			cout << C[i] << "\n";
+			x.push_back(C[i]);
 		}
 
 		cublasDestroy(handle);
