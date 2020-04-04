@@ -39,7 +39,7 @@ public:
 		cout << "\ndone";
 	}
 
-	int forword(vector<float>& input_sample) {
+	float forword(vector<float>& input_sample) {
 		cout << "\nPredicting...";
 		
 		for (size_t i = 1; i < layers.size(); i++)
