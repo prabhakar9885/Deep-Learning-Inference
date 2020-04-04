@@ -38,9 +38,11 @@ int main() {
 		prev_layer_size = layers_dims[0];
 		for (size_t i = 1; i < layers_dims.size(); i++)
 		{
-			vector<vector<float>> weight(layers_dims[i], vector<float>(prev_layer_size, 1.0 ));
+			int current_layer_size = layers_dims[i];
+			vector<vector<float>> weight(current_layer_size, vector<float>(prev_layer_size, 1.0));
+			weight.insert(weight.begin(), vector<float>(current_layer_size, 1.0));
 			weights.push_back(weight);
-			prev_layer_size = layers_dims[i];
+			prev_layer_size = current_layer_size;
 		}
 		nnObj->init(weights);
 

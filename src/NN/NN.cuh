@@ -12,6 +12,7 @@ class NN {
 public:
 	vector<Layer> layers;
 	vector<vector<vector<float>>> weights;
+	vector<vector<float>> bias;
 	NN() {
 
 	}
@@ -25,11 +26,15 @@ public:
 		cout << "\nInitiaizing the NN... ";
 		unsigned __int64 noOfLayers = layers.size();
 		this->weights.push_back(vector<vector<float>>(0));
+		this->bias.push_back(vector<float>(0));
 		if (weights.size() != noOfLayers )
 			throw "Weights dimension mismatches NN dimensions";
 		for (size_t indexOfCurrentLayer = 1; indexOfCurrentLayer < noOfLayers; indexOfCurrentLayer++) {
-			this->weights.push_back( weights[indexOfCurrentLayer] );
-			//cout << "\nWts for Layer-" << indexOfCurrentLayer << ": " << weights[indexOfCurrentLayer].size() << "x" << weights[indexOfCurrentLayer][0].size();
+			vector<vector<float>> &weightsOfCurrentLayer = weights[indexOfCurrentLayer];
+			this->bias.push_back(weightsOfCurrentLayer[0]);
+			weightsOfCurrentLayer.erase(weightsOfCurrentLayer.begin());
+			this->weights.push_back(weightsOfCurrentLayer);
+			//cout << "\nWts for Layer-" << indexOfCurrentLayer << ": " << weightsOfCurrentLayer.size() << "x" << weightsOfCurrentLayer[0].size();
 		}
 		cout << "\ndone";
 	}
@@ -41,7 +46,7 @@ public:
 		{
 			cout << "\n\tComputing for layer-" << i;
 			//  Z = W*X + B
-			axpb_vector_matrix( weights[i], input_sample, 1);
+			axpby_vector_matrix(weights[i], input_sample, bias[i]);
 			computeActivation(input_sample, layers[i].activationFunc);
 			//	A = f(Z)
 		}

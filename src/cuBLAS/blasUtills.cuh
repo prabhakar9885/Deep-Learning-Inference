@@ -35,7 +35,7 @@ namespace utils
 	}
 
 
-	void axpb_vector_matrix(vector<vector<float>> wt, vector<float>& x, float b) {
+	void axpby_vector_matrix(vector<vector<float>> wt, vector<float>& x, vector<float> &bias) {
 
 		size_t m = wt.size();
 		size_t n = wt[0].size();
@@ -51,7 +51,7 @@ namespace utils
 		// Copy weight from host to device
 		for (int i = 0, Ai = 0; i < m;i++)
 		{
-			C[i] = 0;
+			C[i] = bias[i];
 			for (int j = 0; j < n;j++)
 			{
 				W[i * n + j] = wt[i][j];
@@ -77,7 +77,7 @@ namespace utils
 		//	{
 		//		cout << wt[i][j] << " ";
 		//	}
-		//	//cout << "\n";
+		//	cout << "\n";
 		//}
 		//cout << "\n";
 
