@@ -5,11 +5,11 @@ import pickle as p
 
 
 def load_data():
-    train_dataset = h5py.File('/Users/prabhakar/Downloads/Datasets/train_catvnoncat.h5', "r")
+    train_dataset = h5py.File('./Datasets/train_catvnoncat.h5', "r")
     train_set_x_orig = np.array(train_dataset["train_set_x"][:]) # your train set features
     train_set_y_orig = np.array(train_dataset["train_set_y"][:]) # your train set labels
 
-    test_dataset = h5py.File('/Users/prabhakar/Downloads/Datasets/test_catvnoncat.h5', "r")
+    test_dataset = h5py.File('./Datasets/test_catvnoncat.h5', "r")
     test_set_x_orig = np.array(test_dataset["test_set_x"][:]) # your test set features
     test_set_y_orig = np.array(test_dataset["test_set_y"][:]) # your test set labels
 
@@ -517,10 +517,11 @@ test_x_flatten = test_x_orig.reshape(test_x_orig.shape[0], -1).T
 train_x = train_x_flatten/255.
 test_x = test_x_flatten/255.
 
-parameters = L_layer_model(train_x, train_y, layers_dims, num_iterations = 1000, print_cost = True)
+# parameters = L_layer_model(train_x, train_y, layers_dims, num_iterations = 1000, print_cost = True)
+parameters = p.load( open("./weights", "rb") );
 
 pred_train = predict(train_x, train_y, parameters)
 
-p.dump(parameters, open("./weights","ab"))
+# p.dump(parameters, open("./weights","ab"))
 
 print( pred_train )
