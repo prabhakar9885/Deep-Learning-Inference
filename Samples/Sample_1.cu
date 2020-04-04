@@ -67,16 +67,33 @@ unordered_map<string, vector<float>> parse_and_load_data(string fileName)
 vector<vector<vector<float>>> get_weights(std::vector<int>& layers_dims, unordered_map<string, vector<float>> weights_data)
 {
 	vector<vector<vector<float>>> weights;
+
 	int prev_layer_size = 1;
 	vector<vector<float>> weight(layers_dims[0], vector<float>(prev_layer_size, 1.0));
 	weights.push_back(weight);
+	weight.clear();
+
 	prev_layer_size = layers_dims[0];
 	for (size_t i = 1; i < layers_dims.size(); i++)
 	{
 		int current_layer_size = layers_dims[i];
-		vector<vector<float>> weight(current_layer_size, vector<float>(prev_layer_size, 1.0));
-		weight.insert(weight.begin(), vector<float>(current_layer_size, 1.0));
+
+		// Insert Bias (B)
+		vector<float> b_params_for_layer_i = weights_data["B" + to_string(i)];
+		weight.push_back(b_params_for_layer_i);
+
+		// Insert Weights (W)
+		vector<float> w_params_for_layer_i = weights_data["W" + to_string(i)];
+		int num_of_params_for_layer_i = w_params_for_layer_i.size();
+		vector<float> inp_wts_for_a_node_in_layer_i;
+		for (size_t start_index = 0; start_index < num_of_params_for_layer_i; start_index += prev_layer_size)
+		{
+			vector<float> inp_wts_for_a_node_in_layer_i(w_params_for_layer_i.begin() + start_index, w_params_for_layer_i.begin() + start_index + prev_layer_size);
+			weight.push_back(inp_wts_for_a_node_in_layer_i);
+		}
+		
 		weights.push_back(weight);
+		weight.clear();
 		prev_layer_size = current_layer_size;
 	}
 	return weights;
