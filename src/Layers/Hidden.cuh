@@ -9,6 +9,9 @@
 
 class Hidden : public Layer {
 public:
+
+	vector<float> bias;
+
 	Hidden(int size, Activation activationFunc):Layer(size, activationFunc) {
 	}
 
