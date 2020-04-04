@@ -9,6 +9,8 @@
 #ifndef MathOps
 #define MathOps
 
+bool PRINT_TRACE = false;
+
 using namespace std;
 
 namespace utils
@@ -70,27 +72,33 @@ namespace utils
 		cublasSgemv(handle, CUBLAS_OP_T, n, m, &alpha, W, n, X, 1, &beta, C, 1);
 		cudaDeviceSynchronize();
 
-		//cout << "\n";
-		//for (size_t i = 0; i < m; i++)
-		//{
-		//	for (size_t j = 0; j < n; j++)
-		//	{
-		//		cout << wt[i][j] << " ";
-		//	}
-		//	cout << "\n";
-		//}
-		//cout << "\n";
+		if (PRINT_TRACE)
+		{
+			cout << "\n";
+			for (size_t i = 0; i < m; i++)
+			{
+				for (size_t j = 0; j < n; j++)
+				{
+					cout << wt[i][j] << " ";
+				}
+				cout << "\n";
+			}
+			cout << "\n";
 
-		//for (size_t i = 0; i < n; i++)
-		//{
-		//	cout << x[i] << "\n";
-		//}
-		//cout << "\n";
+			for (size_t i = 0; i < n; i++)
+			{
+				cout << x[i] << "\n";
+			}
+			cout << "\n";
+		}
 
 		x = vector<float>();
 		for (size_t i = 0; i < m; i++)
 		{
-			//cout << C[i] << "\n";
+			if (PRINT_TRACE)
+			{
+				cout << C[i] << "\n";
+			}
 			x.push_back(C[i]);
 		}
 
@@ -130,12 +138,15 @@ namespace utils
 
 		cudaDeviceSynchronize();
 
-		//cout << "\n";
+		if(PRINT_TRACE)
+			cout << "\n";
 		for (int i = 0; i < N; i++) {
 			x[i] = arr[i];
-			//cout << x[i] << " ";
+			if(PRINT_TRACE)
+				cout << x[i] << " ";
 		}
-		//cout << "\n\n";
+		if (PRINT_TRACE)
+			cout << "\n\n";
 
 		cudaFree(arr);
 	}
