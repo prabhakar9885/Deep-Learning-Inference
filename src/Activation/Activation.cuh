@@ -8,7 +8,7 @@ enum class Activation
     SIGMOID,
     ReLU,
     SOFTMAX,
-    IDENTITY
+    NONE
 };
 
 

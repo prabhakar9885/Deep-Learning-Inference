@@ -3,15 +3,14 @@
 #define DENSELAYER
 
 
-#include "Hidden.cuh"
 #include "Layer.cuh"
 #include "../Activation/Activation.cuh"
 
-class DenseLayer : public Hidden {
+class DenseLayer : public Layer {
 public:
-	DenseLayer(int size, Activation activationFunc) :Hidden(size, activationFunc) {
+	DenseLayer(int size, Activation activationFunc) :Layer(size, activationFunc) {
 	}
-	DenseLayer(int size, Activation activationFunc, string name) :Hidden(size, activationFunc, name) {
+	DenseLayer(int size, Activation activationFunc, string name) :Layer(size, activationFunc, name) {
 	}
 };
 

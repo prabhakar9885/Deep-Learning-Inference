@@ -88,10 +88,7 @@
     <ClInclude Include="src\Activation\Activation.cuh" />
     <ClInclude Include="src\cuBLAS\blasUtills.cuh" />
     <ClInclude Include="src\Layers\DenseLayer.cuh" />
-    <ClInclude Include="src\Layers\Hidden.cuh" />
-    <ClInclude Include="src\Layers\Input.cuh" />
     <ClInclude Include="src\Layers\Layer.cuh" />
-    <ClInclude Include="src\Layers\Output.cuh" />
     <ClInclude Include="src\NN\NN.cuh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

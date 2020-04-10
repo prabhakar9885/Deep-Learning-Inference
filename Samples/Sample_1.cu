@@ -1,10 +1,7 @@
 
 #include "../src/NN/NN.cuh"
 #include "../src/Layers/Layer.cuh"
-#include "../src/Layers/Input.cuh"
-#include "../src/Layers/Hidden.cuh"
 #include "../src/Layers/DenseLayer.cuh"
-#include "../src/Layers/Output.cuh"
 #include "../src/Activation/Activation.cuh"
 #include <iostream>
 #include <fstream>
@@ -110,7 +107,7 @@ int main() {
 		NN* nnObj = new NN();
 
 		// Push Input layer
-		Input inputLayer(layers_dims[0], "Input layer");
+		Layer inputLayer(layers_dims[0], Activation::NONE, "Input layer");
 		nnObj->pushLayer(inputLayer);
 
 		// Push Hidden layers
@@ -120,7 +117,7 @@ int main() {
 		}
 
 		// Push Output layer
-		Output outputLayer(layers_dims[layers_dims.size() - 1], Activation::SIGMOID, "Output layer");
+		Layer outputLayer(layers_dims[layers_dims.size() - 1], Activation::SIGMOID, "Output layer");
 		nnObj->pushLayer(outputLayer);
 
 		// Init NN with weights
