@@ -15,10 +15,11 @@
     <RootNamespace>Deep_Learning_Inference</RootNamespace>
     <CudaToolkitCustomDir>
     </CudaToolkitCustomDir>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
@@ -43,6 +44,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(CUDA_PATH)\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(CUDA_PATH)\lib\x64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -58,6 +61,9 @@
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
     </CudaCompile>
+    <CudaLink>
+      <LinkOut>$(IntDir)$(TargetName).device-link.obj</LinkOut>
+    </CudaLink>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -82,7 +88,10 @@
     <CudaCompile Include="Samples\Sample_1.cu">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </CudaCompile>
+    <CudaCompile Include="src\cuBLAS\blasUtills.cu" />
     <CudaCompile Include="src\cuBLAS\ImportantSubRoutines.cu" />
+    <CudaCompile Include="src\Layers\Layer.cu" />
+    <CudaCompile Include="src\NN\NN.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Activation\Activation.cuh" />

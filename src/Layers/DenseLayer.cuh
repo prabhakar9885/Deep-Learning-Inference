@@ -10,7 +10,7 @@ class DenseLayer : public Layer {
 public:
 	DenseLayer(int size, Activation activationFunc) :Layer(size, activationFunc) {
 	}
-	DenseLayer(int size, Activation activationFunc, string name) :Layer(size, activationFunc, name) {
+	DenseLayer(int size, Activation activationFunc, std::string name) :Layer(size, activationFunc, name) {
 	}
 };
 
