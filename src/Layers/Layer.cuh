@@ -5,38 +5,20 @@
 #include <vector>
 #include <string>
 #include "../Activation/Activation.cuh"
-#include "../cuBLAS/blasUtills.cuh"
-
-using namespace std;
-using namespace utils;
 
 class Layer {
 public:
 	int size;
-	vector<float> value;
-	string name;
+	std::vector<float> value;
+	std::string name;
 	Activation activationFunc;
 	float* activationValue;
 
-	Layer(int size, Activation activationFunc) {
-		this->size = size;
-		this->value.resize(size);
-		this->activationFunc = activationFunc;
-		this->activationValue = nullptr;
-		this->name = "unnamed";
-	}
+	Layer(int size, Activation activationFunc);
 
-	Layer(int size, Activation activationFunc, string name) {
-		this->size = size;
-		this->value.resize(size);
-		this->activationFunc = activationFunc;
-		this->activationValue = nullptr;
-		this->name = name;
-	}
+	Layer(int size, Activation activationFunc, std::string name);
 
-	void applyActivation() {
-		computeActivation(this->value, this->activationFunc);
-	}
+	void applyActivation();
 };
 
 #endif // !LAYER
