@@ -11,15 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E079DC7B-AC59-4483-B535-EE4164E40C4E}</ProjectGuid>
-    <RootNamespace>Deep_Learning_Inference</RootNamespace>
-    <CudaToolkitCustomDir>
-    </CudaToolkitCustomDir>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{7C7D51F5-9EF5-46D3-A466-E8E2DB4C18C5}</ProjectGuid>
+    <RootNamespace>Sample_Dense_network</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
@@ -56,13 +53,13 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>cublas.lib;cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cudart.lib;cublas.lib;cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
     </CudaCompile>
     <CudaLink>
-      <LinkOut>$(IntDir)$(TargetName).device-link.obj</LinkOut>
+      <AdditionalLibraryDirectories>$(CudaToolkitLibDir)</AdditionalLibraryDirectories>
     </CudaLink>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -85,17 +82,15 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CudaCompile Include="src\cuBLAS\blasUtills.cu" />
-    <CudaCompile Include="src\cuBLAS\ImportantSubRoutines.cu" />
-    <CudaCompile Include="src\Layers\Layer.cu" />
-    <CudaCompile Include="src\NN\NN.cu" />
+    <CudaCompile Include="DenseNetwork.cu" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Activation\Activation.cuh" />
-    <ClInclude Include="src\cuBLAS\blasUtills.cuh" />
-    <ClInclude Include="src\Layers\DenseLayer.cuh" />
-    <ClInclude Include="src\Layers\Layer.cuh" />
-    <ClInclude Include="src\NN\NN.cuh" />
+    <ProjectReference Include="..\DeepLearningInference\DeepLearningInference.vcxproj">
+      <Project>{e079dc7b-ac59-4483-b535-ee4164e40c4e}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DenseNetwork.cuh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

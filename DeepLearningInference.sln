@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeepLearningInference", "DeepLearningInference.vcxproj", "{E079DC7B-AC59-4483-B535-EE4164E40C4E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sample Dense network", "..\Sample Dense network\Sample Dense network.vcxproj", "{7C7D51F5-9EF5-46D3-A466-E8E2DB4C18C5}"
-	ProjectSection(ProjectDependencies) = postProject
-		{E079DC7B-AC59-4483-B535-EE4164E40C4E} = {E079DC7B-AC59-4483-B535-EE4164E40C4E}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
