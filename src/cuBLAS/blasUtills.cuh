@@ -1,6 +1,6 @@
 
-#ifndef MathOps
-#define MathOps
+#ifndef BlasUtils_CUH
+#define BlasUtils_CUH
 
 #include <vector>
 #include <cublas_v2.h>
@@ -21,8 +21,8 @@ public:
 
 	static void axpb_c(std::vector<float> a, std::vector<float>& x, float b);
 
-	static void axpby_vector_matrix(std::vector<std::vector<float>> wt, std::vector<float>& x, std::vector<float>& bias);
+	static void axpby_vector_matrix(cublasHandle_t handle, std::vector<std::vector<float>> wt, std::vector<float>& x, std::vector<float>& bias);
 
-	static void computeActivation(std::vector<float>& x, Activation activation);
+	static void computeActivation( std::vector<float>& x, Activation activation);
 };
-#endif // MathOps
+#endif // BlasUtils_CUH

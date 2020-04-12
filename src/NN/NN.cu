@@ -1,7 +1,8 @@
 #include "NN.cuh"
 
 
-NN::NN() {
+NN::NN(cublasHandle_t handle) {
+	this->handle = handle;
 }
 
 
@@ -36,7 +37,7 @@ float NN::forword(std::vector<float>& input_sample) {
 	{
 		std::cout << "\n\tComputing for layer-" << i;
 		//  Z = W*X + B
-		BlasUtils::axpby_vector_matrix(weights[i], input_sample, bias[i]);
+		BlasUtils::axpby_vector_matrix(this->handle, weights[i], input_sample, bias[i]);
 		BlasUtils::computeActivation(input_sample, layers[i].activationFunc);
 		//	A = f(Z)
 	}

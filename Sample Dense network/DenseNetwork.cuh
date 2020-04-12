@@ -1,5 +1,5 @@
 
-#include "../DeepLearningInference/src/NN/NN.cuh"
+#include "../src/NN/NN.cuh"
 #include <iostream>
 #include <fstream>
 #include <sstream>

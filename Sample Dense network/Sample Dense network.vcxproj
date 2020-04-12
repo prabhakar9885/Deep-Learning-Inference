@@ -85,6 +85,9 @@
     <CudaCompile Include="DenseNetwork.cu" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DeepLearningInference.vcxproj">
+      <Project>{e079dc7b-ac59-4483-b535-ee4164e40c4e}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\DeepLearningInference\DeepLearningInference.vcxproj">
       <Project>{e079dc7b-ac59-4483-b535-ee4164e40c4e}</Project>
     </ProjectReference>

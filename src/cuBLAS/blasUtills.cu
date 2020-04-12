@@ -59,7 +59,7 @@ void BlasUtils::computeActivation(std::vector<float>& x, Activation activation)
 	cudaFree(arr);
 }
 
-void BlasUtils::axpby_vector_matrix(std::vector<std::vector<float>> wt, std::vector<float>& x, std::vector<float>& bias) {
+void BlasUtils::axpby_vector_matrix(cublasHandle_t handle, std::vector<std::vector<float>> wt, std::vector<float>& x, std::vector<float>& bias) {
 
 	size_t m = wt.size();
 	size_t n = wt[0].size();
@@ -89,8 +89,7 @@ void BlasUtils::axpby_vector_matrix(std::vector<std::vector<float>> wt, std::vec
 		X[i] = x[i];
 	}
 
-	cublasHandle_t handle;
-	cublasCreate(&handle);
+
 	cublasSgemv(handle, CUBLAS_OP_T, n, m, &alpha, W, n, X, 1, &beta, C, 1);
 	cudaDeviceSynchronize();
 
@@ -124,7 +123,6 @@ void BlasUtils::axpby_vector_matrix(std::vector<std::vector<float>> wt, std::vec
 		x.push_back(C[i]);
 	}
 
-	cublasDestroy(handle);
 	cudaFree(W);
 	cudaFree(X);
 	cudaFree(C);

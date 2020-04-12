@@ -18,7 +18,9 @@ public:
 	std::vector<Layer> layers;
 	std::vector<std::vector<std::vector<float>>> weights;
 	std::vector<std::vector<float>> bias;
-	NN();
+	cublasHandle_t handle;
+
+	NN(cublasHandle_t handle);
 
 	void pushLayer(Layer& layer);
 
