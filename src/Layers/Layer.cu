@@ -20,3 +20,10 @@ Layer::Layer(int size, Activation activationFunc, std::string name) {
 void Layer::applyActivation() {
 	BlasUtils::computeActivation(this->value, this->activationFunc);
 }
+
+void Layer::forward(cublasHandle_t handle, std::vector<float>& input_sample) {
+	//Z = W * X + B
+	BlasUtils::axpby_vector_matrix(handle, this->weights, input_sample, this->bias);
+	//	A = f(Z)
+	BlasUtils::computeActivation(input_sample, this->activationFunc);
+}

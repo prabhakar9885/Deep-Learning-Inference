@@ -120,10 +120,11 @@ int main() {
 		// Init NN with weights
 		vector<vector<vector<float>>> weights = get_weights(layers_dims, weights_data);
 		nnObj->init(weights);
+		weights.erase(weights.begin(), weights.end());
 
 		// Do inference
 		vector<float> inputSample(layers_dims[0], 1);
-		cout << "\n" << nnObj->forword(inputSample) << "\n";
+		cout << "\n" << nnObj->forward(inputSample) << "\n";
 	}
 	catch (string msg) {
 		cout << "Exception: " << msg << "\n";

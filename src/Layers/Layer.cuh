@@ -4,12 +4,15 @@
 
 #include <vector>
 #include <string>
+#include <cublas_v2.h>
 #include "../Activation/Activation.cuh"
 
 class Layer {
 public:
 	int size;
 	std::vector<float> value;
+	std::vector<std::vector<float>> weights;
+	std::vector<float> bias;
 	std::string name;
 	Activation activationFunc;
 	float* activationValue;
@@ -19,6 +22,8 @@ public:
 	Layer(int size, Activation activationFunc, std::string name);
 
 	void applyActivation();
+
+	void forward(cublasHandle_t handle, std::vector<float>& input_sample);
 };
 
 #endif // !LAYER

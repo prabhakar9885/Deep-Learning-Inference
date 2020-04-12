@@ -16,8 +16,6 @@
 class NN {
 public:
 	std::vector<Layer> layers;
-	std::vector<std::vector<std::vector<float>>> weights;
-	std::vector<std::vector<float>> bias;
 	cublasHandle_t handle;
 
 	NN(cublasHandle_t handle);
@@ -26,7 +24,7 @@ public:
 
 	void init(std::vector<std::vector<std::vector<float>>> weights);
 
-	float forword(std::vector<float>& input_sample);
+	float forward(std::vector<float>& input_sample);
 };
 
 
