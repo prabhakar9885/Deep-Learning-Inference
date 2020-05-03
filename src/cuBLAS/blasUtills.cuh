@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <device_launch_parameters.h>
 #include "../Activation/Activation.cuh"
+#include "../Context/ContextFactory.cuh"
 
 //using namespace std;
 
@@ -21,7 +22,7 @@ public:
 
 	static void axpb_c(std::vector<float> a, std::vector<float>& x, float b);
 
-	static void axpby_vector_matrix(cublasHandle_t handle, std::vector<std::vector<float>> wt, std::vector<float>& x, std::vector<float>& bias);
+	static void axpby_vector_matrix(ContextFactory contextFactory, std::vector<std::vector<float>> wt, std::vector<float>& x, std::vector<float>& bias);
 
 	static void computeActivation( std::vector<float>& x, Activation activation);
 };

@@ -1,8 +1,8 @@
 #include "NN.cuh"
 
 
-NN::NN(cublasHandle_t handle) {
-	this->handle = handle;
+NN::NN(ContextFactory contextFactory) {
+	this->contextFactory = contextFactory;
 }
 
 
@@ -34,12 +34,19 @@ void NN::init(std::vector<std::vector<std::vector<float>>> weights) {
 float NN::forward(std::vector<float>& input_sample) {
 	std::cout << "\nPredicting...";
 
+	std::cout << "\nCreating the context... ";
+	this->contextFactory.createContext(ContextType::cuBLAS);
+	std::cout << "done";
+
 	for (size_t i = 1; i < layers.size(); i++)
 	{
 		std::cout << "\n\tComputing for layer-" << i;
-		this->layers[i].forward(this->handle, input_sample);
+		this->layers[i].forward(this->contextFactory, input_sample);
 	}
 
-	std::cout << "\ndone";
+	std::cout << "\nForword-prop is done";
+	std::cout << "\nDestroying the context... ";
+	this->contextFactory.releaseContext(ContextType::cuBLAS);
+	std::cout << "done";
 	return input_sample[0];
 }

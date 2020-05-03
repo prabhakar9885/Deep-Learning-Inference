@@ -6,6 +6,7 @@
 #include <string>
 #include <cublas_v2.h>
 #include "../Activation/Activation.cuh"
+#include "../Context/ContextFactory.cuh"
 
 class Layer {
 public:
@@ -23,7 +24,7 @@ public:
 
 	void applyActivation();
 
-	void forward(cublasHandle_t handle, std::vector<float>& input_sample);
+	void forward(ContextFactory contextFactory, std::vector<float>& input_sample);
 };
 
 #endif // !LAYER

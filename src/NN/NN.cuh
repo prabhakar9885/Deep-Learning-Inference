@@ -11,14 +11,15 @@
 #include "../Activation/Activation.cuh"
 #include "../Layers/DenseLayer.cuh"
 #include "../cuBLAS/blasUtills.cuh"
+#include "../Context/ContextFactory.cuh"
 
 
 class NN {
 public:
 	std::vector<Layer> layers;
-	cublasHandle_t handle;
+	ContextFactory contextFactory;
 
-	NN(cublasHandle_t handle);
+	NN(ContextFactory contextFactory);
 
 	void pushLayer(Layer& layer);
 

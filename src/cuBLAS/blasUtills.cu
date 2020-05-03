@@ -59,8 +59,9 @@ void BlasUtils::computeActivation(std::vector<float>& x, Activation activation)
 	cudaFree(arr);
 }
 
-void BlasUtils::axpby_vector_matrix(cublasHandle_t handle, std::vector<std::vector<float>> wt, std::vector<float>& x, std::vector<float>& bias) {
-
+void BlasUtils::axpby_vector_matrix(ContextFactory contextFactory, std::vector<std::vector<float>> wt, std::vector<float>& x, std::vector<float>& bias) 
+{
+	cublasHandle_t* handle = contextFactory.getContext().getCublasHandle();
 	size_t m = wt.size();
 	size_t n = wt[0].size();
 	float* W; // m x n
@@ -90,7 +91,7 @@ void BlasUtils::axpby_vector_matrix(cublasHandle_t handle, std::vector<std::vect
 	}
 
 
-	cublasSgemv(handle, CUBLAS_OP_T, n, m, &alpha, W, n, X, 1, &beta, C, 1);
+	cublasSgemv(*handle, CUBLAS_OP_T, n, m, &alpha, W, n, X, 1, &beta, C, 1);
 	cudaDeviceSynchronize();
 
 	if (PRINT_TRACE)

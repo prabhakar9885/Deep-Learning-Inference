@@ -85,6 +85,7 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <CudaCompile Include="src\Context\ContextFactory.cu" />
     <CudaCompile Include="src\cuBLAS\blasUtills.cu" />
     <CudaCompile Include="src\cuBLAS\ImportantSubRoutines.cu" />
     <CudaCompile Include="src\Layers\Layer.cu" />
@@ -92,10 +93,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Activation\Activation.cuh" />
+    <ClInclude Include="src\Context\ContextFactory.cuh" />
+    <ClInclude Include="src\Context\ContextObject.cuh" />
     <ClInclude Include="src\cuBLAS\blasUtills.cuh" />
     <ClInclude Include="src\Layers\DenseLayer.cuh" />
     <ClInclude Include="src\Layers\Layer.cuh" />
     <ClInclude Include="src\NN\NN.cuh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Context\ContextObject.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

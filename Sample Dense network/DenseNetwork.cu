@@ -95,13 +95,8 @@ int main() {
 	unordered_map<string, vector<float>> weights_data = parse_and_load_data(R"(C:\Users\prabhakarb\source\repos\DeepLearningInference\Model\weights.lst)");
 
 	try {
-		cublasHandle_t handle;
-		cublasStatus_t status = cublasCreate_v2(&handle);
-		if (status == CUBLAS_STATUS_SUCCESS) 
-		{
-			cout << "cuBLAS initialized.\n";
-		}
-		NN* nnObj = new NN(handle);
+		ContextFactory contextFactory;
+		NN* nnObj = new NN(contextFactory);
 
 		// Push Input layer
 		Layer inputLayer(layers_dims[0], Activation::NONE, "Input layer");

@@ -1,5 +1,7 @@
 
 #include "../src/NN/NN.cuh"
+#include "../src/Context/ContextFactory.cuh"
+#include "../src/Context/ContextObject.cuh"
 #include <iostream>
 #include <fstream>
 #include <sstream>
