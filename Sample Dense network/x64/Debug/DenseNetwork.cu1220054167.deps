@@ -127,6 +127,7 @@ C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\cuda_runtime_api.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\cuda_surface_types.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\cuda_texture_types.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\cudnn.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\device_atomic_functions.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\device_launch_parameters.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\device_types.h
@@ -151,7 +152,9 @@ C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\texture_types.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\vector_functions.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\vector_functions.hpp
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\vector_types.h
+C:\Users\prabhakarb\source\repos\DeepLearningInference\src\Context\ContextObject.cuh
 C:\Users\prabhakarb\source\repos\DeepLearningInference\src\Layers\..\Activation\Activation.cuh
+C:\Users\prabhakarb\source\repos\DeepLearningInference\src\Layers\..\Context\ContextFactory.cuh
 C:\Users\prabhakarb\source\repos\DeepLearningInference\src\NN\..\cuBLAS\blasUtills.cuh
 C:\Users\prabhakarb\source\repos\DeepLearningInference\src\NN\..\Layers\DenseLayer.cuh
 C:\Users\prabhakarb\source\repos\DeepLearningInference\src\NN\..\Layers\Layer.cuh

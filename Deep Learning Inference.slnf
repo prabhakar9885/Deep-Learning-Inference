@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "C:\\Users\\prabhakarb\\source\\repos\\Deep Learning Inference\\DeepLearningInference\\DeepLearningInference.sln",
+    "projects": [
+      "..\\Sample ConvNet\\Sample ConvNet.vcxproj",
+      "..\\Sample Dense network\\Sample Dense network.vcxproj",
+      "DeepLearningInference.vcxproj"
+    ]
+  }
+}
