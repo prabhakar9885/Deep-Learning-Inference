@@ -1,7 +1,7 @@
 
-#include "../DeepLearningInference/src/NN/NN.cuh"
-#include "../DeepLearningInference/src/Context/ContextFactory.cuh"
-#include "../DeepLearningInference/src/Context/ContextObject.cuh"
+#include "../../DeepLearningInference/src/NN/NN.cuh"
+#include "../../DeepLearningInference/src/Context/ContextFactory.cuh"
+#include "../../DeepLearningInference/src/Context/ContextObject.cuh"
 #include <iostream>
 #include <fstream>
 #include <sstream>

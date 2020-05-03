@@ -92,7 +92,7 @@ int main() {
 
 	vector<int> layers_dims({ 12288, 128, 128, 128, 128, 128, 64, 64, 32, 1 });
 	//vector<int> layers_dims({ 6, 4, 3, 2, 2, 2, 3, 4, 2, 1 });
-	unordered_map<string, vector<float>> weights_data = parse_and_load_data(R"(..\DeepLearningInference\Model\weights.lst)");
+	unordered_map<string, vector<float>> weights_data = parse_and_load_data(R"(Model\weights.lst)");
 
 	try {
 		ContextFactory contextFactory;
