@@ -1,0 +1,7 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets(1850,5): warning : The referenced project '..\DeepLearningInference\DeepLearningInference.vcxproj' does not exist.
+  Compiling CUDA source file DenseNetwork.cu...
+  
+  C:\Users\prabhakarb\source\repos\DeepLearningInference\Sample Dense network>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\bin\nvcc.exe" -gencode=arch=compute_30,code=\"sm_30,compute_30\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\bin\HostX86\x64" -x cu  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\DenseNetwork.cu.obj "C:\Users\prabhakarb\source\repos\DeepLearningInference\Sample Dense network\DenseNetwork.cu" 
+  DenseNetwork.cu
+C:/Users/prabhakarb/source/repos/DeepLearningInference/Sample Dense network/DenseNetwork.cu(74): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Sample Dense network.vcxproj -> C:\Users\prabhakarb\source\repos\DeepLearningInference\x64\Debug\Sample Dense network.exe
