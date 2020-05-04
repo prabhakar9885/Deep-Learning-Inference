@@ -1,4 +1,4 @@
-Identity=DenseNetwork.cu
+Identity=src\DenseNetwork.cu
 AdditionalCompilerOptions=
 AdditionalCompilerOptions=
 AdditionalDependencies=
