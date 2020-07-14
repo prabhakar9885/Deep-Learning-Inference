@@ -1,15 +1,21 @@
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\vc142.pdb
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\vc142.idb
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\cudnn_sample.obj
 x64\debug\kernel.cu.obj
 c:\users\prabhakarb\source\repos\deeplearninginference\x64\debug\sample convnet.ilk
 c:\users\prabhakarb\source\repos\deeplearninginference\x64\debug\sample convnet.exe
 c:\users\prabhakarb\source\repos\deeplearninginference\x64\debug\sample convnet.pdb
 c:\users\prabhakarb\source\repos\deeplearninginference\x64\debug\sample convnet.lib
 c:\users\prabhakarb\source\repos\deeplearninginference\x64\debug\sample convnet.exp
-c:\users\prabhakarb\source\repos\sample convnet\x64\debug\kernel.cu.cache
-c:\users\prabhakarb\source\repos\sample convnet\x64\debug\kernel.cu.obj
-c:\users\prabhakarb\source\repos\sample convnet\x64\debug\vc142.pdb
-c:\users\prabhakarb\source\repos\sample convnet\x64\debug\sample convnet.tlog\cudacompile.read.1u.tlog
-c:\users\prabhakarb\source\repos\sample convnet\x64\debug\sample convnet.tlog\cudacompile.write.1u.tlog
-c:\users\prabhakarb\source\repos\sample convnet\x64\debug\sample convnet.tlog\link.command.1.tlog
-c:\users\prabhakarb\source\repos\sample convnet\x64\debug\sample convnet.tlog\link.read.1.tlog
-c:\users\prabhakarb\source\repos\sample convnet\x64\debug\sample convnet.tlog\link.write.1.tlog
-c:\users\prabhakarb\source\repos\sample convnet\x64\debug\sample convnet.tlog\sample convnet.write.1u.tlog
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\kernel.cu.cache
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\kernel.cu.obj
+c:\users\prabhakarb\source\repos\deep learning inference\deeplearninginference\x64\debug\sample convnet.exe
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\sample convnet.tlog\cl.command.1.tlog
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\sample convnet.tlog\cl.read.1.tlog
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\sample convnet.tlog\cl.write.1.tlog
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\sample convnet.tlog\cudacompile.read.1u.tlog
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\sample convnet.tlog\cudacompile.write.1u.tlog
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\sample convnet.tlog\link.command.1.tlog
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\sample convnet.tlog\link.read.1.tlog
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\sample convnet.tlog\link.write.1.tlog
+c:\users\prabhakarb\source\repos\deep learning inference\sample convnet\x64\debug\sample convnet.tlog\sample convnet.write.1u.tlog
