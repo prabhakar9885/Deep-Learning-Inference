@@ -51,7 +51,6 @@ int main(int argc, const char* argv[]) {
 
     bool with_sigmoid = (argc > 3) ? std::atoi(argv[3]) : 0;
     std::cerr << "With sigmoid: " << std::boolalpha << with_sigmoid << std::endl;
-
     cv::Mat image = load_image(argv[1]);
 
     cudaSetDevice(gpu_id);
@@ -187,6 +186,62 @@ int main(int argc, const char* argv[]) {
         &beta,
         output_descriptor,
         d_output));
+
+    /*
+     *  Implement the Pooling layer
+     */
+    {
+        cudnnPoolingDescriptor_t pooling_desc;
+        //create descriptor handle
+        checkCUDNN(cudnnCreatePoolingDescriptor(&pooling_desc));
+        //initialize descriptor
+        checkCUDNN(cudnnSetPooling2dDescriptor(pooling_desc,            //descriptor handle
+            CUDNN_POOLING_MAX,       //mode - max pooling
+            CUDNN_NOT_PROPAGATE_NAN, //NaN propagation mode
+            3,                       //window height
+            3,                       //window width
+            0,                       //vertical padding
+            0,                       //horizontal padding
+            1,                       //vertical stride
+            1));                     //horizontal stride
+
+        int height1 = height - 3 + 1;
+        int width1 = width - 3 + 1;
+
+        float* out_data;
+        int image_bytes1 = batch_size * channels * height1 * width1 * sizeof(float);
+        cudaMalloc(&out_data, image_bytes1);
+        cudaMemset(out_data, 0, image_bytes1);
+
+        cudnnTensorDescriptor_t out_desc;
+        //create output data tensor descriptor
+        checkCUDNN(cudnnCreateTensorDescriptor(&out_desc));
+        //initialize output data descriptor
+        checkCUDNN(cudnnSetTensor4dDescriptor(out_desc,                 //descriptor handle
+            CUDNN_TENSOR_NHWC,//data format
+            CUDNN_DATA_FLOAT, //data type (precision)
+            batch_size,       //number of images
+            channels,         //number of channels
+            height1,           //data height
+            width1));          //data width
+
+        //Call pooling operator
+        checkCUDNN(cudnnPoolingForward(cudnn,         //cuDNN context handle
+            pooling_desc,       //pooling descriptor handle
+            &alpha,             //alpha scaling factor
+            output_descriptor,  //input tensor descriptor
+            d_output,           //input data pointer to GPU memory
+            &beta,              //beta scaling factor
+            out_desc,  //output tensor descriptor
+            out_data));         //output data pointer from GPU memory
+
+        float* h_output1 = new float[image_bytes1];
+        cudaMemcpy(h_output1, out_data, image_bytes1, cudaMemcpyDeviceToHost);
+
+        save_image("cudnn-out-pool.png", h_output1, height1, width1);        
+        cudaFree(out_data);
+        cudnnDestroyTensorDescriptor(out_desc);
+    }
 
     if (with_sigmoid) {
         cudnnActivationDescriptor_t activation_descriptor;
