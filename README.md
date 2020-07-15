@@ -16,6 +16,7 @@ The repo has the following projects
 
 # Todo
 - [ ] Add support for *Conv* and *Pool* layers.
+- [ ] Add Logger
 - [ ] Document *How to load weights* ?
   - [ ] Before that, provide a clean, consistent and scalable way to load the weights without any dependency on NN architecture.
 - [ ] Refactor the code for better readility and maintainability by following the *C++ best-practices and STLs*.
