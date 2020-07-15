@@ -17,10 +17,6 @@ Layer::Layer(int size, Activation activationFunc, std::string name) {
 	this->name = name;
 }
 
-void Layer::applyActivation() {
-	BlasUtils::computeActivation(this->value, this->activationFunc);
-}
-
 void Layer::forward(ContextFactory contextFactory, std::vector<float>& input_sample) {
 	//Z = W * X + B
 	BlasUtils::axpby_vector_matrix(contextFactory, this->weights, input_sample, this->bias);

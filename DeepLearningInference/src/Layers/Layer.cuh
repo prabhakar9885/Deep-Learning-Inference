@@ -22,8 +22,6 @@ public:
 
 	Layer(int size, Activation activationFunc, std::string name);
 
-	void applyActivation();
-
 	void forward(ContextFactory contextFactory, std::vector<float>& input_sample);
 };
 
