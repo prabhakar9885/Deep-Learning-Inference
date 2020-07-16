@@ -4,6 +4,9 @@
     <CudaCompile Include="kernel.cu" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cuDNN_sample.cpp" />
+    <Image Include="tensorflow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cuDNN_sample.cu" />
   </ItemGroup>
 </Project>

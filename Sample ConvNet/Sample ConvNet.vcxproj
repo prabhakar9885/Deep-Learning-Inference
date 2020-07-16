@@ -83,7 +83,10 @@
     <CudaCompile Include="kernel.cu" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cuDNN_sample.cpp" />
+    <ClCompile Include="cuDNN_sample.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="tensorflow.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
