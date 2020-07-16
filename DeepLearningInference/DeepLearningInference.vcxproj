@@ -88,19 +88,24 @@
     <CudaCompile Include="src\Context\ContextFactory.cu" />
     <CudaCompile Include="src\cuBLAS\blasUtills.cu" />
     <CudaCompile Include="src\cuBLAS\ImportantSubRoutines.cu" />
+    <CudaCompile Include="src\Layers\DenseLayer.cu" />
+    <CudaCompile Include="src\Layers\InputLayer.cu" />
     <CudaCompile Include="src\Layers\Layer.cu" />
     <CudaCompile Include="src\NN\NN.cu" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Layers\ConvLayer.cuh" />
     <ClInclude Include="src\Activation\Activation.cuh" />
     <ClInclude Include="src\Context\ContextFactory.cuh" />
     <ClInclude Include="src\Context\ContextObject.cuh" />
     <ClInclude Include="src\cuBLAS\blasUtills.cuh" />
     <ClInclude Include="src\Layers\DenseLayer.cuh" />
+    <ClInclude Include="src\Layers\InputLayer.cuh" />
     <ClInclude Include="src\Layers\Layer.cuh" />
     <ClInclude Include="src\NN\NN.cuh" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Layers\ConvLayer.cu" />
     <ClCompile Include="src\Context\ContextObject.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

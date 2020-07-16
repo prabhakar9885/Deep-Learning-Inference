@@ -6,26 +6,27 @@ NN::NN(ContextFactory contextFactory) {
 }
 
 
-void NN::pushLayer(Layer& layer) {
+void NN::pushLayer(Layer* layer) {
 	layers.push_back(layer);
-	std::cout << "\nPushed " << "Layer-" << (layers.size() - 1) << ": " << layer.name << "(" << layer.size << ")";
+	std::string layerSize;
+	for (int num : layer->getSize())
+		layerSize += std::to_string(num) + ",";
+	layerSize.pop_back();
+	std::cout << "\nPushed " << "Layer-" << (layers.size() - 1) << ": " << layer->name << "(" << layerSize << ")";
 }
 
 
-void NN::init(std::vector<std::vector<std::vector<float>>> weights) {
+void NN::init(std::vector<std::vector<float>> weightsAndBias) {
 	std::cout << "\nInitiaizing the NN... ";
-	unsigned __int64 noOfLayers = layers.size();
-	this->layers[0].weights = std::vector<std::vector<float>>(0);
-	this->layers[0].bias = std::vector<float>(0);
+	unsigned __int64 noOfLayers = layers.size() - 1; // We are ignoring the input layer
+	this->layers[0]->init();
 
-	if (weights.size() != noOfLayers)
+	if (weightsAndBias.size() != noOfLayers * 2)
 		throw "Weights dimension mismatches NN dimensions";
 
 	for (size_t indexOfCurrentLayer = 1; indexOfCurrentLayer < noOfLayers; indexOfCurrentLayer++) {
-		std::vector<std::vector<float>>& weightsOfCurrentLayer = weights[indexOfCurrentLayer];
-		this->layers[indexOfCurrentLayer].bias = weightsOfCurrentLayer[0];
-		weightsOfCurrentLayer.erase(weightsOfCurrentLayer.begin());
-		this->layers[indexOfCurrentLayer].weights = weightsOfCurrentLayer;
+		this->layers[indexOfCurrentLayer]->initWeight(weightsAndBias[(indexOfCurrentLayer - 1) * 2]);
+		this->layers[indexOfCurrentLayer]->initBias(weightsAndBias[(indexOfCurrentLayer - 1) * 2 + 1]);
 	}
 	std::cout << "\ndone";
 }
@@ -38,10 +39,9 @@ float NN::forward(std::vector<float>& input_sample) {
 	this->contextFactory.createContext(ContextType::cuBLAS);
 	std::cout << "done";
 
-	for (size_t i = 1; i < layers.size(); i++)
-	{
+	for (size_t i = 1; i < layers.size(); i++)	{
 		std::cout << "\n\tComputing for layer-" << i;
-		this->layers[i].forward(this->contextFactory, input_sample);
+		this->layers[i]->forward(this->contextFactory, input_sample);
 	}
 
 	std::cout << "\nForword-prop is done";

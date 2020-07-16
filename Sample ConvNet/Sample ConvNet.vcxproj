@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cuDNN_sample.cu" />
+    <ClCompile Include="Sample_cnn.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="tensorflow.png" />

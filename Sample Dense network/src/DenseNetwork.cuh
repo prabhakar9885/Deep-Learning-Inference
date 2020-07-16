@@ -10,7 +10,4 @@
 #include <chrono> 
 
 
-std::unordered_map<std::string, std::vector<float>> parse_and_load_data(std::string fileName);
-
-
-std::vector<std::vector<std::vector<float>>> get_weights(std::vector<int>& layers_dims, std::unordered_map<std::string, std::vector<float>> weights_data);
+std::vector<std::vector<float>> parse_and_load_data(std::string fileName);

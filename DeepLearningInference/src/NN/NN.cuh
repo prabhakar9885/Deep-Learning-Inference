@@ -10,20 +10,21 @@
 #include "../Layers/Layer.cuh"
 #include "../Activation/Activation.cuh"
 #include "../Layers/DenseLayer.cuh"
+#include "../Layers/InputLayer.cuh"
 #include "../cuBLAS/blasUtills.cuh"
 #include "../Context/ContextFactory.cuh"
 
 
 class NN {
 public:
-	std::vector<Layer> layers;
+	std::vector<Layer*> layers;
 	ContextFactory contextFactory;
 
 	NN(ContextFactory contextFactory);
 
-	void pushLayer(Layer& layer);
+	void pushLayer(Layer* layer);
 
-	void init(std::vector<std::vector<std::vector<float>>> weights);
+	void init(std::vector<std::vector<float>> weightsAndBias);
 
 	float forward(std::vector<float>& input_sample);
 };

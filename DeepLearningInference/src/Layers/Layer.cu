@@ -1,25 +1,15 @@
 #include "Layer.cuh"
-#include "../cuBLAS/blasUtills.cuh"
 
-Layer::Layer(int size, Activation activationFunc) {
+Layer::Layer(std::vector<int> size) {
 	this->size = size;
-	this->value.resize(size);
-	this->activationFunc = activationFunc;
-	this->activationValue = nullptr;
 	this->name = "unnamed";
 }
 
-Layer::Layer(int size, Activation activationFunc, std::string name) {
+Layer::Layer(std::vector<int> size, std::string name) {
 	this->size = size;
-	this->value.resize(size);
-	this->activationFunc = activationFunc;
-	this->activationValue = nullptr;
 	this->name = name;
 }
 
-void Layer::forward(ContextFactory contextFactory, std::vector<float>& input_sample) {
-	//Z = W * X + B
-	BlasUtils::axpby_vector_matrix(contextFactory, this->weights, input_sample, this->bias);
-	//	A = f(Z)
-	BlasUtils::computeActivation(input_sample, this->activationFunc);
+std::vector<int> Layer::getSize() {
+	return this->size;
 }

@@ -5,24 +5,22 @@
 #include <vector>
 #include <string>
 #include <cublas_v2.h>
-#include "../Activation/Activation.cuh"
 #include "../Context/ContextFactory.cuh"
 
 class Layer {
 public:
-	int size;
-	std::vector<float> value;
-	std::vector<std::vector<float>> weights;
-	std::vector<float> bias;
+	std::vector<int> size;
 	std::string name;
-	Activation activationFunc;
-	float* activationValue;
 
-	Layer(int size, Activation activationFunc);
+	Layer(std::vector<int> size);
 
-	Layer(int size, Activation activationFunc, std::string name);
+	Layer(std::vector<int> size, std::string name);
 
-	void forward(ContextFactory contextFactory, std::vector<float>& input_sample);
+	std::vector<int> getSize();
+	virtual void init() = 0;
+	virtual void initWeight(const std::vector<float>& weights) = 0;
+	virtual void initBias(const std::vector<float>& bias) = 0;
+	virtual void forward(ContextFactory contextFactory, std::vector<float>& input_sample) = 0;
 };
 
 #endif // !LAYER
