@@ -24,7 +24,7 @@ void NN::init(std::vector<std::vector<float>> weightsAndBias) {
 	if (weightsAndBias.size() != noOfLayers * 2)
 		throw "Weights dimension mismatches NN dimensions";
 
-	for (size_t indexOfCurrentLayer = 1; indexOfCurrentLayer < noOfLayers; indexOfCurrentLayer++) {
+	for (size_t indexOfCurrentLayer = 1; indexOfCurrentLayer <= noOfLayers; indexOfCurrentLayer++) {
 		this->layers[indexOfCurrentLayer]->initWeight(weightsAndBias[(indexOfCurrentLayer - 1) * 2]);
 		this->layers[indexOfCurrentLayer]->initBias(weightsAndBias[(indexOfCurrentLayer - 1) * 2 + 1]);
 	}

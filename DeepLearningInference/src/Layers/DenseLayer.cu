@@ -17,8 +17,10 @@ void DenseLayer::init() {
 void DenseLayer::initWeight(const std::vector<float> &weights) {
 	int numberOfRows = this->getSize()[0];
 	int numberOfCols = weights.size() / numberOfRows;
-	for (int i = 0; i < numberOfRows; i += numberOfCols)
-		this->weights.push_back(std::vector<float>(weights.begin() + i, weights.begin() + i + numberOfCols));
+	for (int i = 0; i < numberOfRows; i++) {
+		std::vector<float> row(weights.begin() + i, weights.begin() + i + numberOfCols);
+		this->weights.push_back(row);
+	}
 }
 
 void DenseLayer::initBias(const std::vector<float>& bias) {
