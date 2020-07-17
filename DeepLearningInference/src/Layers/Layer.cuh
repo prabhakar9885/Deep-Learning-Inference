@@ -13,7 +13,6 @@ public:
 	std::string name;
 
 	Layer(std::vector<int> size);
-
 	Layer(std::vector<int> size, std::string name);
 
 	std::vector<int> getSize();

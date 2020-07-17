@@ -1,9 +1,9 @@
 #include "InputLayer.cuh"
 
-InputLayer::InputLayer(std::vector<int> size): Layer(size) {
+InputLayer::InputLayer(int size) : Layer(std::vector<int>(1, size)) {
 }
 
-InputLayer::InputLayer(std::vector<int> size, std::string name) : Layer(size, name) {
+InputLayer::InputLayer(int size, std::string name) : Layer(std::vector<int>(1, size), name) {
 }
 
 void InputLayer::init() {

@@ -91,7 +91,7 @@ void BlasUtils::axpby_vector_matrix(ContextFactory contextFactory, std::vector<s
 	}
 
 
-	cublasSgemv(*handle, CUBLAS_OP_N, n, m, &alpha, W, n, X, 1, &beta, C, 1);
+	cublasSgemv(*handle, CUBLAS_OP_T, n, m, &alpha, W, n, X, 1, &beta, C, 1);
 	cudaDeviceSynchronize();
 
 	if (PRINT_TRACE)

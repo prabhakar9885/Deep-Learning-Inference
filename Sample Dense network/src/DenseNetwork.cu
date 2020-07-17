@@ -42,21 +42,31 @@ vector<vector<float>> parse_and_load_data(string fileName)
 
 int main() {
 
-	vector<int> layers_dims({ 12288, 128, 128, 128, 128, 128, 64, 64, 32, 1 });
-	//vector<int> layers_dims({ 6, 4, 3, 2, 2, 2, 3, 4, 2, 1 });
-	vector<vector<float>> weightsAndBiases = parse_and_load_data(R"(Model\weights.lst)");
+	//vector<int> layers_dims({ 12288, 128, 128, 128, 128, 128, 64, 64, 32, 1 });
+	//vector<vector<float>> weightsAndBiases = parse_and_load_data(R"(Model\weights.lst)");
+
+	vector<int> layers_dims({ 5, 4, 3, 2, 1 });
+	vector<vector<float>> weightsAndBiases;
+	weightsAndBiases.push_back(vector<float>({ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 })); // Weight-1 ( size = layers_dims[0] * layers_dims[1] )
+	weightsAndBiases.push_back(vector<float>({ 1, 1, 1, 1 }));							// Bias-1	( size = layer_dims[1] )
+	weightsAndBiases.push_back(vector<float>({ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }));	// Weight-2 ( size = layers_dims[1] * layers_dims[2] )
+	weightsAndBiases.push_back(vector<float>({ 1, 1, 1 }));								// Bias-2	( size = layer_dims[2] )
+	weightsAndBiases.push_back(vector<float>({ 1, 1, 1, 1, 1, 1 }));	// Weight-3 ( size = layers_dims[2] * layers_dims[3] )
+	weightsAndBiases.push_back(vector<float>({ 1, 1 }));				// Bias-3	( size = layer_dims[3] )
+	weightsAndBiases.push_back(vector<float>({ 1, 1 }));				// Weight-4 ( size = layers_dims[3] * layers_dims[4] )
+	weightsAndBiases.push_back(vector<float>({ 1 }));					// Bias-4	( size = layer_dims[4] )
 
 	try {
 		ContextFactory contextFactory;
 		NN* nnObj = new NN(contextFactory);
 
 		// Push Input layer
-		Layer* inputLayer = new InputLayer(vector<int>(1,layers_dims[0]), "Input layer");
+		Layer* inputLayer = new InputLayer(layers_dims[0], "Input layer");
 		nnObj->pushLayer(inputLayer);
 
 		// Push Hidden layers
 		for (int i = 1; i < layers_dims.size() - 1; i++) {
-			DenseLayer* hiddenLayer = new DenseLayer(layers_dims[i], Activation::ReLU, "Hidden " + to_string(i));
+			DenseLayer* hiddenLayer = new DenseLayer(layers_dims[i], Activation::SIGMOID, "Hidden " + to_string(i));
 			nnObj->pushLayer(hiddenLayer);
 		}
 

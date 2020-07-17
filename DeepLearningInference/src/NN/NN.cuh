@@ -9,6 +9,7 @@
 #include <vector>
 #include "../Layers/Layer.cuh"
 #include "../Activation/Activation.cuh"
+#include "../Layers/ConvLayer.cuh"
 #include "../Layers/DenseLayer.cuh"
 #include "../Layers/InputLayer.cuh"
 #include "../cuBLAS/blasUtills.cuh"
