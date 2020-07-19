@@ -8,9 +8,9 @@
 
 class InputLayer: public Layer {
 public:
-	InputLayer::InputLayer(int size);
-	InputLayer::InputLayer(int size, std::string name);
+	InputLayer(int size, std::string name="Input");
 	void init();
+	LayerType getLayerType();
 	void initWeight(const std::vector<float>& weights);
 	void initBias(const std::vector<float>& bias);
 	void forward(ContextFactory contextFactory, std::vector<float>& input);

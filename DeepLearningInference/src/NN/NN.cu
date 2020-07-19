@@ -37,6 +37,7 @@ float NN::forward(std::vector<float>& input_sample) {
 
 	std::cout << "\nCreating the context... ";
 	this->contextFactory.createContext(ContextType::cuBLAS);
+	this->contextFactory.createContext(ContextType::cuDNN);
 	std::cout << "done";
 
 	for (size_t i = 1; i < layers.size(); i++)	{
@@ -47,6 +48,7 @@ float NN::forward(std::vector<float>& input_sample) {
 	std::cout << "\nForword-prop is done";
 	std::cout << "\nDestroying the context... ";
 	this->contextFactory.releaseContext(ContextType::cuBLAS);
+	this->contextFactory.releaseContext(ContextType::cuDNN);
 	std::cout << "done";
 	return input_sample[0];
 }

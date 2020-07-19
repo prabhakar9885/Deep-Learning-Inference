@@ -40,7 +40,7 @@ void save_image(const char* output_filename,
     std::cerr << "Wrote output to " << output_filename << std::endl;
 }
 
-int main(int argc, const char* argv[]) {
+int main_(int argc, const char* argv[]) {
     if (argc < 2) {
         std::cerr << "usage: conv <image> [gpu=0] [sigmoid=0]" << std::endl;
         std::exit(EXIT_FAILURE);

@@ -1,12 +1,12 @@
 #include "DenseLayer.cuh"
 #include "../cuBLAS/blasUtills.cuh"
 
-DenseLayer::DenseLayer(int size, Activation activationFunc) : Layer(std::vector<int>(1, size)) {
-	this->activationFunc = activationFunc;
-}
-
 DenseLayer::DenseLayer(int size, Activation activationFunc, std::string name) : Layer(std::vector<int>(1, size), name) {
 	this->activationFunc = activationFunc;;
+}
+
+LayerType DenseLayer::getLayerType() {
+	return LayerType::DENSE;
 }
 
 void DenseLayer::init() {

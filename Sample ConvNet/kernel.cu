@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 
-int main_()
+int main_1()
 {
     int version = (int)cudnnGetVersion();
     printf("cudnnGetVersion() : %d , CUDNN_VERSION from cudnn.h : %d \n", version, CUDNN_VERSION);

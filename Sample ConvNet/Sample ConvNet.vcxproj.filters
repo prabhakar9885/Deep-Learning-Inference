@@ -8,6 +8,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cuDNN_sample.cu" />
-    <ClCompile Include="Sample_cnn.cpp" />
+    <ClCompile Include="src\Sample_cnn.cu" />
   </ItemGroup>
 </Project>

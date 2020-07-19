@@ -1,22 +1,18 @@
 
-#ifndef CONVLAYER
-#define CONVLAYER
+#ifndef POOLINGLAYER
+#define POOLINGLAYER
 
 #include "Layer.cuh"
 #include "../Activation/Activation.cuh"
 #include "../Context/ContextFactory.cuh"
 
 
-class ConvLayer : public Layer {
+class PoolingLayer : public Layer {
 public:
-	std::vector<std::vector<float>> weights;
-	std::vector<float> bias;
-	Activation activationFunc;
 	int padding = 0;
 	int stride = 0;
-	int dilation = 0;
 
-	ConvLayer(std::vector<int> size, Activation activationFunc, std::string name="ConvLayer", int padding = 0, int stride = 1, int dilation = 1);
+	PoolingLayer(std::vector<int> size, std::string name="Pooling", int padding = 0, int stride = 1);
 
 	void init();
 	LayerType getLayerType();
@@ -26,4 +22,4 @@ public:
 
 };
 
-#endif // !CONVLAYER
+#endif // !POOLINGLAYER

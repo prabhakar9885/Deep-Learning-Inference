@@ -13,10 +13,10 @@ public:
 	std::vector<float> bias;
 	Activation activationFunc;
 
-	DenseLayer(int size, Activation activationFunc);
-	DenseLayer(int size, Activation activationFunc, std::string name);
+	DenseLayer(int size, Activation activationFunc, std::string name="Dense");
 
 	void init();
+	LayerType getLayerType();
 	void initWeight(const std::vector<float>& weights);
 	void initBias(const std::vector<float>& bias);
 	void forward(ContextFactory contextFactory, std::vector<float>& input_sample);

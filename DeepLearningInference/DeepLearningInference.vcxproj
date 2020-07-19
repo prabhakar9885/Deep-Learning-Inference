@@ -91,6 +91,7 @@
     <CudaCompile Include="src\Layers\DenseLayer.cu" />
     <CudaCompile Include="src\Layers\InputLayer.cu" />
     <CudaCompile Include="src\Layers\Layer.cu" />
+    <CudaCompile Include="src\Layers\PoolingLayer.cu" />
     <CudaCompile Include="src\NN\NN.cu" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +103,7 @@
     <ClInclude Include="src\Layers\DenseLayer.cuh" />
     <ClInclude Include="src\Layers\InputLayer.cuh" />
     <ClInclude Include="src\Layers\Layer.cuh" />
+    <ClInclude Include="src\Layers\PoolingLayer.cuh" />
     <ClInclude Include="src\NN\NN.cuh" />
   </ItemGroup>
   <ItemGroup>
