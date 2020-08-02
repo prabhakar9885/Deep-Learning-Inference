@@ -1,6 +1,7 @@
 #include "PoolingLayer.cuh"
 
-PoolingLayer::PoolingLayer(std::vector<int> size, std::string name, int padding, int stride) : Layer(size, name) {
+PoolingLayer::PoolingLayer(std::vector<int> size, std::string name, PoolingType poolingType, int padding, int stride) : Layer(size, name) {
+	this->poolingType = poolingType;
 	this->padding = padding;
 	this->stride = stride;
 }

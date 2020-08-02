@@ -9,9 +9,10 @@
 class ContextObject
 {
 private:
-	cublasHandle_t* cublas_handle = nullptr;
-	cudnnHandle_t* cudnn_handle = nullptr;
+	cublasHandle_t* cublas_handle;
+	cudnnHandle_t* cudnn_handle;
 public:
+	ContextObject();
 	cublasHandle_t* getCublasHandle();
 	cudnnHandle_t* getCudnnHandle();
 	void releaseCublasHandle();

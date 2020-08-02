@@ -14,6 +14,11 @@ enum LayerType {
 	POOL
 };
 
+enum MemoryLayout {
+	NHWC = CUDNN_TENSOR_NHWC,
+	NCHW = CUDNN_TENSOR_NCHW
+};
+
 class Layer {
 public:
 	std::vector<int> size;

@@ -1,5 +1,10 @@
 #include "./ContextObject.cuh"
 
+ContextObject::ContextObject()
+{
+	cublas_handle = nullptr;
+	cudnn_handle = nullptr;
+}
 
 cublasHandle_t* ContextObject::getCublasHandle()
 {
