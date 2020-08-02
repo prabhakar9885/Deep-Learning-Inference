@@ -63,8 +63,7 @@ int main() {
 		Layer* hiddenLayer3 = new DenseLayer(3, Activation::SIGMOID, "Dense 3");
 		cnnObj->pushLayer(hiddenLayer2);
 
-		vector<vector<float>> weights;
-		cnnObj->init(weights);
+		cnnObj->init(weightsAndBiases);
 
 		// Do inference
 		vector<float> inputSample({ 
