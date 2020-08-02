@@ -87,6 +87,7 @@
   <ItemGroup>
     <CudaCompile Include="src\Context\ContextFactory.cu" />
     <CudaCompile Include="src\cuBLAS\blasUtills.cu" />
+    <CudaCompile Include="src\cuBLAS\cudnnLayer.cu" />
     <CudaCompile Include="src\cuBLAS\ImportantSubRoutines.cu" />
     <CudaCompile Include="src\Layers\DenseLayer.cu" />
     <CudaCompile Include="src\Layers\InputLayer.cu" />
@@ -95,6 +96,7 @@
     <CudaCompile Include="src\NN\NN.cu" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\cuBLAS\cudnnLayer.cuh" />
     <ClInclude Include="src\Layers\ConvLayer.cuh" />
     <ClInclude Include="src\Activation\Activation.cuh" />
     <ClInclude Include="src\Context\ContextFactory.cuh" />
