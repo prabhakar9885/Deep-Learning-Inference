@@ -46,7 +46,7 @@ int main() {
 	//vector<vector<float>> weightsAndBiases = parse_and_load_data(R"(Model\weights.lst)");
 
 	vector<int> layers_dims({ 5, 4, 3, 2, 1 });
-	vector<vector<float>> weightsAndBiases;
+	list<vector<float>> weightsAndBiases;
 	weightsAndBiases.push_back(vector<float>({ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 })); // Weight-1 ( size = layers_dims[0] * layers_dims[1] )
 	weightsAndBiases.push_back(vector<float>({ 1, 1, 1, 1 }));							// Bias-1	( size = layer_dims[1] )
 	weightsAndBiases.push_back(vector<float>({ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }));	// Weight-2 ( size = layers_dims[1] * layers_dims[2] )

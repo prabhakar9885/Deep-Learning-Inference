@@ -16,18 +16,32 @@ void NN::pushLayer(Layer* layer) {
 }
 
 
-void NN::init(std::vector<std::vector<float>> weightsAndBias) {
+void NN::init(std::list<std::vector<float>> weightsAndBias) 
+{
 	std::cout << "\nInitiaizing the NN... ";
 	unsigned __int64 noOfLayers = layers.size() - 1; // We are ignoring the input layer
-	this->layers[0]->init();
 
 	if (weightsAndBias.size() != noOfLayers * 2)
 		throw "Weights dimension mismatches NN dimensions";
 
-	for (size_t indexOfCurrentLayer = 1; indexOfCurrentLayer <= noOfLayers; indexOfCurrentLayer++) {
-		this->layers[indexOfCurrentLayer]->initWeight(weightsAndBias[(indexOfCurrentLayer - 1) * 2]);
-		this->layers[indexOfCurrentLayer]->initBias(weightsAndBias[(indexOfCurrentLayer - 1) * 2 + 1]);
+	auto weightsAndBiasIterator = weightsAndBias.begin();
+	auto layerIterator = this->layers.begin();
+	(*layerIterator)->init();
+	layerIterator++;	// Skip the input layer, as there are no incoming weights for the input layer
+
+	while (layerIterator != this->layers.end() && weightsAndBiasIterator != weightsAndBias.end())
+	{
+		Layer* currentLayer = *layerIterator;
+		currentLayer->initWeight(*weightsAndBiasIterator);
+		weightsAndBiasIterator++;
+		currentLayer->initBias(*weightsAndBiasIterator);
+		weightsAndBiasIterator++;
+		layerIterator++;
 	}
+
+	if (layerIterator == this->layers.end() ^ weightsAndBiasIterator == weightsAndBias.end())
+		throw "Initializing the Weights and biases failed.";
+
 	std::cout << "\ndone";
 }
 
@@ -40,9 +54,15 @@ float NN::forward(std::vector<float>& input_sample) {
 	this->contextFactory.createContext(ContextType::cuDNN);
 	std::cout << "done";
 
-	for (size_t i = 1; i < layers.size(); i++)	{
-		std::cout << "\n\tComputing for layer-" << i;
-		this->layers[i]->forward(this->contextFactory, input_sample);
+	auto layerIterator = this->layers.begin();
+	layerIterator++;	// Skip the input layer, as there are no incoming weights for the input layer
+
+	while (layerIterator != this->layers.end())
+	{
+		Layer* currentLayer = *layerIterator;
+		std::cout << "\n\tComputing for layer-" << std::distance(this->layers.begin(), layerIterator);
+		currentLayer->forward(this->contextFactory, input_sample);
+		layerIterator++;
 	}
 
 	std::cout << "\nForword-prop is done";
