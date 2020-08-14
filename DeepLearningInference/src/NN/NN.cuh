@@ -19,6 +19,8 @@
 
 
 class NN {
+private:
+	void forward(Layer* previousLayer, Layer* currentLayer);
 public:
 	std::list<Layer*> layers;
 	ContextFactory contextFactory;

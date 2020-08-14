@@ -12,7 +12,7 @@ void NN::pushLayer(Layer* layer) {
 	for (int num : layer->getSize())
 		layerSize += std::to_string(num) + ",";
 	layerSize.pop_back();
-	std::cout << "\nPushed " << "Layer-" << (layers.size() - 1) << ": " << layer->name << "(" << layerSize << ")";
+	std::cout << "\nPushed " << "Layer-" << (layers.size() - 1) << ": " << layer->getName() << "(" << layerSize << ")";
 }
 
 
@@ -45,7 +45,6 @@ void NN::init(std::list<std::vector<float>> weightsAndBias)
 	std::cout << "\ndone";
 }
 
-
 float NN::forward(std::vector<float>& input_sample) {
 	std::cout << "\nPredicting...";
 
@@ -54,14 +53,15 @@ float NN::forward(std::vector<float>& input_sample) {
 	this->contextFactory.createContext(ContextType::cuDNN);
 	std::cout << "done";
 
-	auto layerIterator = this->layers.begin();
-	layerIterator++;	// Skip the input layer, as there are no incoming weights for the input layer
+	float* inputData = input_sample.data();
+	int inputElementCount = input_sample.size();
+	std::list<Layer*>::iterator layerIterator = this->layers.begin();
 
 	while (layerIterator != this->layers.end())
 	{
 		Layer* currentLayer = *layerIterator;
 		std::cout << "\n\tComputing for layer-" << std::distance(this->layers.begin(), layerIterator);
-		currentLayer->forward(this->contextFactory, input_sample);
+		currentLayer->forward(this->contextFactory, (void*)inputData, inputElementCount, layerIterator);
 		layerIterator++;
 	}
 

@@ -23,7 +23,11 @@ public:
 	static void axpb_c(std::vector<float> a, std::vector<float>& x, float b);
 
 	static void axpby_vector_matrix(ContextFactory contextFactory, std::vector<std::vector<float>> wt, std::vector<float>& x, std::vector<float>& bias);
+	static void axpby_vector_matrix(ContextFactory contextFactory,
+		float* x, int xSize, std::vector<std::vector<float>> wt, std::vector<float>& bias,
+		float*& outputOfCurrentLayer, int& outputSizeForCurrentLayer);
 
+	static void computeActivation(float*& x, int xSize, Activation activation);
 	static void computeActivation( std::vector<float>& x, Activation activation);
 };
 #endif // BlasUtils_CUH
