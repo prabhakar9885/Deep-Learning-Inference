@@ -55,9 +55,8 @@ void InputLayer::initBias(const std::vector<float>& bias) {
 void InputLayer::forward(ContextFactory contextFactory, void* inputSample, int inputElementCount , std::list<Layer*>::iterator layerIterator) {
 	this->allocAndInitDataOnDevice(inputSample, inputElementCount, layerIterator);
 
-	this->outputOfCurrentLayer = inputSample;
 	float* outputOfCurrentLayer = (float*)inputSample;
+	std::cout << " Activation=> ";
 	for (int i = 0; i < inputElementCount; i++)
-		std::cout << outputOfCurrentLayer[i] << " ";
-	std::cout << "\n";
+		std::cout << " " << outputOfCurrentLayer[i];
 }

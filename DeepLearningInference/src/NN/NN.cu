@@ -57,18 +57,21 @@ float NN::forward(std::vector<float>& input_sample) {
 	int inputElementCount = input_sample.size();
 	std::list<Layer*>::iterator layerIterator = this->layers.begin();
 
+	Layer* currentLayer;
 	while (layerIterator != this->layers.end())
 	{
-		Layer* currentLayer = *layerIterator;
+		currentLayer = *layerIterator;
 		std::cout << "\n\tComputing for layer-" << std::distance(this->layers.begin(), layerIterator);
 		currentLayer->forward(this->contextFactory, (void*)inputData, inputElementCount, layerIterator);
 		layerIterator++;
 	}
+
+	float res = ((float*)(currentLayer->getOuputOnDevice()))[0];
 
 	std::cout << "\nForword-prop is done";
 	std::cout << "\nDestroying the context... ";
 	this->contextFactory.releaseContext(ContextType::cuBLAS);
 	this->contextFactory.releaseContext(ContextType::cuDNN);
 	std::cout << "done";
-	return input_sample[0];
+	return res;
 }
