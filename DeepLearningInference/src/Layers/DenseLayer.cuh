@@ -23,9 +23,9 @@ public:
 	void* getOuputOnDevice();
 	void initWeight(const std::vector<float>& weights);
 	void initBias(const std::vector<float>& bias);
-	void forward(ContextFactory contextFactory, std::vector<float>& input_sample);
+	//void forward(ContextFactory contextFactory, std::vector<float>& input_sample);
 	void forward(ContextFactory contextFactory, void* inputSample, int inputElementCount, std::list<Layer*>::iterator layerIterator);
-	virtual void forward(ContextFactory contextFactory, Layer* previousLayer);
+	//virtual void forward(ContextFactory contextFactory, Layer* previousLayer);
 };
 
 #endif // !DENSELAYER

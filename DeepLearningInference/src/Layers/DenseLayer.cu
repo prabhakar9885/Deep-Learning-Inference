@@ -20,7 +20,7 @@ void* DenseLayer::allocAndInitDataOnDevice(void* inputDataOnHost, int inputEleme
 	cudaMallocManaged((void**)&inputVectorOnDevice, this->getSize().front() * 1 * sizeof(float));
 	for (size_t i = 0; i < inputSize; i++)
 	{
-		inputVectorOnDevice[i] = inputVectorOnHost[i];
+		inputVectorOnDevice[i] = 0;
 	}
 	this->outputOfCurrentLayer = inputVectorOnDevice;
 
@@ -53,45 +53,38 @@ void DenseLayer::initBias(const std::vector<float>& bias) {
 	this->bias = bias;
 }
 
-void DenseLayer::forward(ContextFactory contextFactory, std::vector<float>& input_sample) {
-	//Z = W * X + B
-	BlasUtils::axpby_vector_matrix(contextFactory, this->weights, input_sample, this->bias);
-	//	A = f(Z)
-	BlasUtils::computeActivation(input_sample, this->activationFunc);
-}
-
-void DenseLayer::forward(ContextFactory contextFactory, Layer* previousLayer) {
-	
-	float* outputFromPreviousLayer = (float*)previousLayer->getOuputOnDevice();
-	int outputSizeFromPreviousLayer = previousLayer->getSize().front();
-	
-	float* outputOfCurrentLayer;
-	int outputSizeOfCurrentLayer = this->getSize().front();
-	
-	//Z = W * X + B
-	BlasUtils::axpby_vector_matrix(contextFactory,
-		outputFromPreviousLayer, outputSizeFromPreviousLayer,
-		this->weights, this->bias, outputOfCurrentLayer, outputSizeOfCurrentLayer);
-
-	//	A = f(Z)
-	BlasUtils::computeActivation(outputOfCurrentLayer, outputSizeOfCurrentLayer, this->activationFunc);
-
-	this->outputOfCurrentLayer = outputOfCurrentLayer;
-	for (int i = 0; i < outputSizeOfCurrentLayer; i++)
-		std::cout << outputOfCurrentLayer[i] << " ";
-	std::cout << "\n";
-}
+//void DenseLayer::forward(ContextFactory contextFactory, std::vector<float>& input_sample) {
+//	//Z = W * X + B
+//	BlasUtils::axpby_vector_matrix(contextFactory, this->weights, input_sample, this->bias);
+//	//	A = f(Z)
+//	BlasUtils::computeActivation(input_sample, this->activationFunc);
+//}
+//
+//void DenseLayer::forward(ContextFactory contextFactory, Layer* previousLayer) {
+//	
+//	float* outputFromPreviousLayer = (float*)previousLayer->getOuputOnDevice();
+//	int outputSizeFromPreviousLayer = previousLayer->getSize().front();
+//	
+//	float* outputOfCurrentLayer;
+//	int outputSizeOfCurrentLayer = this->getSize().front();
+//	
+//	//Z = W * X + B
+//	BlasUtils::axpby_vector_matrix(contextFactory,
+//		outputFromPreviousLayer, outputSizeFromPreviousLayer,
+//		this->weights, this->bias, outputOfCurrentLayer, outputSizeOfCurrentLayer);
+//
+//	//	A = f(Z)
+//	BlasUtils::computeActivation(outputOfCurrentLayer, outputSizeOfCurrentLayer, this->activationFunc);
+//}
 
 void DenseLayer::forward(ContextFactory contextFactory, void* inputSample, int inputElementCount, std::list<Layer*>::iterator layerIterator) {
-	
-	this->allocAndInitDataOnDevice(inputSample, inputElementCount, layerIterator);
-	
+		
 	Layer* prevLayer = *(std::prev(layerIterator, 1));
 	float* outputFromPreviousLayer = (float*)prevLayer->getOuputOnDevice();
 	int outputSizeFromPreviousLayer = prevLayer->getSize().front();
 	
 	float* outputForCurrentLayer;
-	int outputSizeForCurrentLayer;
+	int outputSizeForCurrentLayer = this->getSize().front();
 
 	//Z = W * X + B
 	BlasUtils::axpby_vector_matrix(contextFactory,
@@ -103,5 +96,9 @@ void DenseLayer::forward(ContextFactory contextFactory, void* inputSample, int i
 	//	A = f(Z)
 	BlasUtils::computeActivation(outputForCurrentLayer, outputSizeForCurrentLayer, this->activationFunc);
 
-	this->outputOfCurrentLayer = outputOfCurrentLayer;
+	std::cout << " Activation=> ";
+	for (int i = 0; i < outputSizeForCurrentLayer; i++)
+		std::cout << " " << outputForCurrentLayer[i];
+
+	this->outputOfCurrentLayer = outputForCurrentLayer;
 }
